@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import {useDispatch} from 'react-redux';
+import * as json from './data.json';
+import Section from './components/Section';
+import { getInitialData } from './store/actions/actions.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getInitialData(json))
+      .then(() => setIsLoading(false))
+  }, [dispatch]);
+  
+  return (  
+      isLoading ? <p>isLoading...</p> : (
+        <div className="App">
+      {/* {
+        sections !== null && sections.map((section, index) => (
+          <Section section={section} key={index}/>
+        ))
+      } */}
     </div>
+      )
   );
 }
 

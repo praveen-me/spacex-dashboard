@@ -1,0 +1,73 @@
+{
+  "response": [
+    {
+      "sectionName": "movies",
+      "isVertical": false,
+      "cardType": "cover",
+      "data": [
+        {
+          "id": 1,
+          "movieName": "Dream Girl",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
+        },
+        {
+          "id": 2,
+          "movieName": "Chichore",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "rating": 6.8
+        },
+        {
+          "id": 3,
+          "movieName": "Section 345",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
+        }
+      ]
+    },
+    {
+      "sectionName": "collections",
+      "isVertical": true,
+      "cardType": "container",
+      "data": [
+        {
+          "id": 1,
+          "movieName": "Navratri",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+        },
+        {
+          "id": 2,
+          "movieName": "Chichore",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+        },
+        {
+          "id": 3,
+          "movieName": "Section 345",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+        }
+      ]
+    },
+    {
+      "sectionName": "events",
+      "isVertical": true,
+      "cardType": "container",
+      "data": [
+        {
+          "id": 1,
+          "movieName": "Navratri",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+        },
+        {
+          "id": 2,
+          "movieName": "Chichore",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+        },
+        {
+          "id": 3,
+          "movieName": "Section 345",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+        }
+      ]
+    }
+  ]
+}
