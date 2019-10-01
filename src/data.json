@@ -1,6 +1,7 @@
 {
   "response": [
     {
+      "id": "ggfdgf",
       "sectionName": "movies",
       "isVertical": false,
       "cardType": "cover",
@@ -26,6 +27,7 @@
       ]
     },
     {
+      "id": "bdjgfy",
       "sectionName": "collections",
       "isVertical": true,
       "cardType": "container",
@@ -48,6 +50,7 @@
       ]
     },
     {
+      "id": "bhfdg",
       "sectionName": "events",
       "isVertical": true,
       "cardType": "container",

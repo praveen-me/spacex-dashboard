@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Card from './Card';
 
-const  Section = ({ section }) => {	
+const Section = ({ section }) => {	
 	const { sectionName, isVertical, cardType, data } = section;
 		return (
-			<div>
-				<h2>{ sectionName }</h2>
+			<div className="section-container">
+				<h2 className="section-title">{ sectionName }</h2>
 				<div className={`card-container ${isVertical && 'vertical-list'}`}>
 					{
 						data && data.map(card => (

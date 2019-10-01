@@ -6,9 +6,9 @@ const Card = ({ card, cardType }) => {
 	return (
 		<div className={`card ${cardType}`}>
 			<h3 className="movie-title">{movieName}</h3>
-			<div className="imgContainer">
-				<img src={imageURL} alt="movie" className="picture"/>
-			</div>
+			{
+				cardType === 'container' ? <div className="imgContainer" style={{backgroundImage: `url('${imageURL}')`}}/> : <img src={imageURL} alt="movie" className="picture"/>
+			}
 			<p>{card.rating ? `Rating: ${card.rating}` : '' }</p>
 		</div>
 	)
