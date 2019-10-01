@@ -24,15 +24,18 @@ body {
   font-weight: 300;
 }
 
-.picture {
-  width: 300px;
-  border-radius: 5px;
-}
-
 .card {
   margin: 2rem;
 }
 
+.cover {
+  .picture {
+    width: 300px;
+    border-radius: 5px;
+  }  
+}
+
+// Container Card
 .imgContainer {
   height: 300px;
   width: 300px;
@@ -44,14 +47,60 @@ body {
 
 .container {
   position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  display: inline-block;
+  width: 300px;
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .6)
+  }
+  .movie-title {
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    bottom: 0;
+    padding-left: 2rem;
+  }
+}
+
+// Large Card
+.large {
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 400px;
+  }
+  .title-container {
+    background: #ddd;
+    color: #000;
+    overflow: hidden;
+    flex: 1; 
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+  }
+  .picture {
+    width: 200px;
+  }
 }
 
 .section-container {
 }
 
 .card-container {
+  display: grid;
 }
 
 .vertical-list {
-  display: flex;
+  display: block;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 800px;
+  height: 350px;
 }

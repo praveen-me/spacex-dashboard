@@ -53,7 +53,7 @@
       "id": "bhfdg",
       "sectionName": "events",
       "isVertical": true,
-      "cardType": "container",
+      "cardType": "large",
       "data": [
         {
           "id": 1,
