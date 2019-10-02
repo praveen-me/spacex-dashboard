@@ -40,13 +40,13 @@
         },
         {
           "id": 2,
-          "movieName": "Chichore",
+          "movieName": "Comedy Shows",
           "imageURL": "https://in.bmscdn.com/discovery_card/navratri_300x300_collection_28-08-2019-01-14-01-948.jpg",
           "rating": 6.8
         },
         {
           "id": 3,
-          "movieName": "Section 345",
+          "movieName": "Music Shows",
           "imageURL": "https://in.bmscdn.com/discovery_card/music-shows_19-12-2018-08-32-21-485.jpg",
           "rating": 6.8
         }
