@@ -33,18 +33,25 @@ const Section = ({ section, cards }) => {
 		<div className="section-container">
 			<div className="section-title__container">
 				<h2 className="section-title">{ sectionName }</h2>
-				<form>
-					<label htmlFor="vertical">Vertical</label>
-					<input type="checkbox" name="vertical" checked={isVertical} onChange={handleIsVerticalChange}/>
-				</form>
-				<select value={cardType} onChange={handleChangeCardType}>
-					<option>Select Card</option>
-					{
-						cards.map((card) => (
-							<option value={card} key={card}>{card}</option>
-						))
-					}
-				</select>
+				<div className="section-options__container">
+					<form>
+						<label htmlFor="vertical">Vertical</label>
+						<input type="checkbox" name="vertical" checked={isVertical} onChange={handleIsVerticalChange}/>
+					</form>
+					<label htmlFor="select-card">
+						<span className="section-card__label">
+						Select Card
+						</span>
+						<select value={cardType} name="select-card" onChange={handleChangeCardType}>
+							<option>Select Card</option>
+							{
+								cards.map((card) => (
+									<option value={card} key={card}>{card}</option>
+								))
+							}
+						</select>
+					</label>
+				</div>
 			</div>
 			<div className={`card-container ${isVertical && 'vertical-list'}`}>
 				{

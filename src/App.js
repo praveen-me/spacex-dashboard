@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import * as json from './data.json';
 import { getInitialData } from './store/actions/actions.js';
 import Dashboard from './components/Dashboard.js';
+import Loader from './components/Loader.js';
 
 // Card types
 // cover
@@ -19,7 +20,7 @@ function App() {
       .then(() => setIsLoading(false))
   }, [dispatch]);
   
-  return isLoading ? <p>isLoading...</p> : 
+  return isLoading ? <Loader /> : 
   <div className="wrapper">
     <Dashboard/>
   </div>  ;
