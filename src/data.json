@@ -2,8 +2,8 @@
   "response": [
     {
       "id": "ggfdgf",
-      "sectionName": "movies",
-      "isVertical": false,
+      "sectionName": "Movies",
+      "isVertical": true,
       "cardType": "cover",
       "data": [
         {
@@ -28,47 +28,79 @@
     },
     {
       "id": "bdjgfy",
-      "sectionName": "collections",
-      "isVertical": true,
+      "sectionName": "Collections",
+      "isVertical": false,
       "cardType": "container",
       "data": [
         {
           "id": 1,
           "movieName": "Navratri",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "rating": 6.8
         },
         {
           "id": 2,
           "movieName": "Chichore",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
         },
         {
           "id": 3,
           "movieName": "Section 345",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "rating": 6.8
         }
       ]
     },
     {
       "id": "bhfdg",
-      "sectionName": "events",
+      "sectionName": "Events",
       "isVertical": true,
       "cardType": "large",
       "data": [
         {
           "id": 1,
           "movieName": "Navratri",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
         },
         {
           "id": 2,
           "movieName": "Chichore",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "rating": 6.8
         },
         {
           "id": 3,
           "movieName": "Section 345",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg"
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
+        }
+      ]
+    },
+    {
+      "id": "bhfdg",
+      "sectionName": "Programs",
+      "isVertical": true,
+      "cardType": "largeOverlay",
+      "data": [
+        {
+          "id": 1,
+          "movieName": "Navratri",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
+        },
+        {
+          "id": 2,
+          "movieName": "Chichore",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "rating": 6.8
+        },
+        {
+          "id": 3,
+          "movieName": "Section 345",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "rating": 6.8
         }
       ]
     }

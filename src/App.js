@@ -4,6 +4,13 @@ import * as json from './data.json';
 import { getInitialData } from './store/actions/actions.js';
 import Dashboard from './components/Dashboard.js';
 
+// Card types
+// cover
+// container
+// large
+// large-overlay
+
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();

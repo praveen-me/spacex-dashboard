@@ -35,15 +35,6 @@ body {
   }  
 }
 
-// Container Card
-.imgContainer {
-  height: 300px;
-  width: 300px;
-  border-radius: 5px;
-  background-position: center;
-  background-size: auto;
-  background-repeat: no-repeat;
-}
 
 .container {
   position: relative;
@@ -51,6 +42,15 @@ body {
   overflow: hidden;
   display: inline-block;
   width: 300px;
+
+  .imgContainer {
+    height: 300px;
+    width: 300px;
+    border-radius: 5px;
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+  }
   .overlay {
     position: absolute;
     height: 100%;
@@ -90,7 +90,36 @@ body {
   }
 }
 
-.section-container {
+.large-overlay {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+  background-size: cover;
+  .imgContainer {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .6)
+  }
+  .movie-title {
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    bottom: 0;
+    padding-left: 2rem;
+  }
 }
 
 .card-container {
@@ -101,6 +130,10 @@ body {
   display: block;
   overflow-x: scroll;
   overflow-y: hidden;
-  width: 800px;
-  height: 350px;
+  white-space: nowrap;
+  height: 100%;
+  max-height: 550px;
+  .card {
+    display: inline-block;
+  }
 }

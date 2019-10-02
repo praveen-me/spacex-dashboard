@@ -2,6 +2,7 @@ import React from 'react'
 import CoverCard from './cards/CoverCard';
 import ContainerCard from './cards/ContainerCard';
 import LargeCard from './cards/LargeCard';
+import LargeOverlayCard from './cards/LargeOverlayCard';
 
 const Section = ({ section }) => {	
 	const { sectionName, isVertical, cardType, data } = section;
@@ -13,6 +14,8 @@ const Section = ({ section }) => {
 		Card = ContainerCard;
 	} else if(cardType === 'large') {
 		Card = LargeCard;
+	} else {
+		Card = LargeOverlayCard;
 	}
 	
 	return (
