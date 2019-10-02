@@ -20,8 +20,8 @@
         },
         {
           "id": 3,
-          "movieName": "Section 345",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "movieName": "Joker",
+          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/joker-et00100071-03-04-2019-10-23-41.jpg",
           "rating": 6.8
         }
       ]
@@ -35,19 +35,19 @@
         {
           "id": 1,
           "movieName": "Navratri",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "imageURL": "https://in.bmscdn.com/discovery_card/comedy-shows_19-12-2018-08-32-38-751.jpg",
           "rating": 6.8
         },
         {
           "id": 2,
           "movieName": "Chichore",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "imageURL": "https://in.bmscdn.com/discovery_card/navratri_300x300_collection_28-08-2019-01-14-01-948.jpg",
           "rating": 6.8
         },
         {
           "id": 3,
           "movieName": "Section 345",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "imageURL": "https://in.bmscdn.com/discovery_card/music-shows_19-12-2018-08-32-21-485.jpg",
           "rating": 6.8
         }
       ]
@@ -60,20 +60,20 @@
       "data": [
         {
           "id": 1,
-          "movieName": "Navratri",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "movieName": "Sunburn",
+          "imageURL": "https://in.bmscdn.com/Events/moviecard/sunburn-goa-2019-et00104928-2019-9-17-t-12-32-4.jpg",
           "rating": 6.8
         },
         {
           "id": 2,
-          "movieName": "Chichore",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
+          "movieName": "U2: The Joshua Show",
+          "imageURL": "https://in.bmscdn.com/Events/moviecard/u2-the-joshua-tree-tour-2019-mumbai-et00112212-2019-9-30-t-11-20-2.jpg",
           "rating": 6.8
         },
         {
           "id": 3,
-          "movieName": "Section 345",
-          "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
+          "movieName": "Yellow Glow",
+          "imageURL": "https://in.bmscdn.com/Events/moviecard/sunburn-arena-with-yellow-claw-et00110300-2019-9-24-t-20-24-2.jpg",
           "rating": 6.8
         }
       ]
@@ -88,19 +88,22 @@
           "id": 1,
           "movieName": "Navratri",
           "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
-          "rating": 6.8
+          "rating": 6.8,
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
           "id": 2,
           "movieName": "Chichore",
           "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/war-et00107162-15-07-2019-11-09-39.jpg",
-          "rating": 6.8
+          "rating": 6.8,
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
           "id": 3,
           "movieName": "Section 345",
           "imageURL": "https://in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/dream-girl-et00089745-30-11-2018-04-32-07.jpg",
-          "rating": 6.8
+          "rating": 6.8,
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
       ]
     }

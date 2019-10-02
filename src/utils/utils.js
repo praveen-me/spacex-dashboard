@@ -1,3 +1,3 @@
 export const fakeAjax = (data) => {
-  return new Promise((resolve, reject) => setTimeout(() => resolve(data.default), 1000));
+  return new Promise((resolve) => setTimeout(() => resolve(data.default), 3000));
 }

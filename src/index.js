@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {StrictMode} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {Provider} from 'react-redux';
@@ -7,6 +7,6 @@ import './scss/main.scss'
 
 ReactDOM.render(
 <Provider store={store}>
-	<App />
+	<StrictMode><App /></StrictMode>
 </Provider>, document.getElementById('root'));
 
