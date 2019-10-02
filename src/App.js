@@ -10,7 +10,6 @@ import Dashboard from './components/Dashboard.js';
 // large
 // large-overlay
 
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ function App() {
   
   return isLoading ? <p>isLoading...</p> : 
   <div className="wrapper">
-    <Dashboard />
+    <Dashboard/>
   </div>  ;
 }
 

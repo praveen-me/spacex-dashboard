@@ -1,5 +1,5 @@
 import {fakeAjax} from '../../utils/utils'
-import {GET_DATA} from './type';
+import {GET_DATA, CHANGE_IS_VERTICAL, CHANGE_CARD_TYPE} from './type';
 
 export const getInitialData = (json) => async (dispatch) => {
 
@@ -19,3 +19,17 @@ export const getInitialData = (json) => async (dispatch) => {
 		return Promise.reject(e);
 	}
 }
+
+export const changeSectionIsVertical = (id) => ({
+	type: CHANGE_IS_VERTICAL,
+	payload: {
+		sectionId: id
+	}
+});
+
+export const changeCardType = (data) => ({
+	type: CHANGE_CARD_TYPE,
+	payload: {
+		...data
+	}
+})

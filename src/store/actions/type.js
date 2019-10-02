@@ -1,1 +1,5 @@
 export const GET_DATA = "GET_DATA";
+
+export const CHANGE_IS_VERTICAL = "CHANGE_IS_VERTICAL";
+
+export const CHANGE_CARD_TYPE = "CHANGE_CARD_TYPE";
