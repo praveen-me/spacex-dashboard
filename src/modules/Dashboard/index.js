@@ -6,7 +6,7 @@ import {
   TableRow,
   Container,
 } from '../../styled/modules/Dashboard'
-import tableColums from '../../utils/tableColums'
+import { tableColumns } from '../../utils/helpers'
 import Launches from './Launches'
 
 function Dashboard() {
@@ -15,8 +15,10 @@ function Dashboard() {
       <DashboardWrapper>
         <DashboardTableHead>
           <TableRow>
-            {tableColums.map((column) => (
-              <DashboardTableColumn key={column}>{column}</DashboardTableColumn>
+            {tableColumns.map((column, index) => (
+              <DashboardTableColumn key={column} sizeNo={index + 1}>
+                {column}
+              </DashboardTableColumn>
             ))}
           </TableRow>
         </DashboardTableHead>

@@ -6,7 +6,7 @@ export const StatusWrapper = styled.span`
 
   background-color: ${(props) => {
     switch (props.type) {
-      case 'sucess':
+      case 'success':
         return '#DEF7EC'
       case 'failed':
         return '#FDE2E1'
@@ -21,7 +21,7 @@ export const StatusText = styled.div`
   font-size: 12px;
   color: ${(props) => {
     switch (props.type) {
-      case 'sucess':
+      case 'success':
         return '#03543F'
       case 'failed':
         return '#981B1C'
