@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { getColumnWidth } from '../../utils/helpers'
 
 export const Container = styled.main`
   width: 960px;
@@ -21,7 +22,6 @@ export const DashboardTableHead = styled.thead`
 export const TableRow = styled.tr`
   padding-left: 24px;
   display: flex;
-  padding-right: 1rem;
   justify-content: space-between;
   flex: 1;
   height: 40px;
@@ -34,4 +34,5 @@ export const DashboardTableColumn = styled.td`
   color: #4b5563;
   line-height: 12px;
   font-weight: 500;
+  width: ${(props) => `${getColumnWidth(props.sizeNo)}px`};
 `
