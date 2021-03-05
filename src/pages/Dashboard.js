@@ -1,5 +1,7 @@
-function Dashboard() {
-  return <div>Dashboard</div>
+import Dashboard from '../modules/Dashboard'
+
+function DashboardPage() {
+  return <Dashboard />
 }
 
-export default Dashboard
+export default DashboardPage
