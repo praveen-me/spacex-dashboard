@@ -1,0 +1,5 @@
+API's Used for the Project
+
+1 - Get all launches => /launches
+2 - Get Single Launch => /launches/:id
+3 - Get rocket information => /rockets/:id
