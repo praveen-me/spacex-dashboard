@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 import { getColumnWidth } from '../../utils/helpers'
 
+const DataColumn = styled.td`
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 12px;
+  width: ${(props) => `${getColumnWidth(props.sizeNo)}px`};
+`
+
 export const Container = styled.main`
   width: 960px;
   margin: 3rem auto;
@@ -27,12 +35,16 @@ export const TableRow = styled.tr`
   height: 40px;
 `
 
-export const DashboardTableColumn = styled.td`
-  display: flex;
-  align-items: center;
-  font-size: 12px;
+export const DashboardTableColumn = styled(DataColumn)`
   color: #4b5563;
-  line-height: 12px;
   font-weight: 500;
-  width: ${(props) => `${getColumnWidth(props.sizeNo)}px`};
+`
+
+export const LaunchesWrapper = styled.tbody`
+  display: flex;
+  flex-direction: column;
+`
+
+export const LaunchData = styled(DataColumn)`
+  color: #1f2937;
 `

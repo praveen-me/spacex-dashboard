@@ -1,4 +1,4 @@
-import { LaunchesWrapper } from '../../styled/modules/Launch'
+import { LaunchesWrapper } from '../../styled/modules/Dashboard'
 import Launch from './Launch'
 
 function Launches() {
