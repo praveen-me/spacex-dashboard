@@ -68,6 +68,13 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
   }
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer
+  }
 `
 
 export default GlobalStyles
