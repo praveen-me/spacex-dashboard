@@ -92,6 +92,9 @@ export async function getLaunches({ page = 1, limit = 10, query = {} }) {
         },
       ],
       limit,
+      sort: {
+        flight_number: 'asc',
+      },
     },
   })
 }

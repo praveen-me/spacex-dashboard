@@ -1,9 +1,10 @@
 export function getAllLaunches(state) {
-  const { launches } = state
+  const { launches, filters } = state
 
   const { currentPage, data } = launches
+  const { currentFilter } = filters
 
-  return data[currentPage]
+  return data[currentFilter] && data[currentFilter][currentPage]
 }
 
 export function getPageStatus(state) {
@@ -15,5 +16,14 @@ export function getPageStatus(state) {
   return {
     allPages: result,
     currentPage,
+  }
+}
+
+export function getFiltersState(state) {
+  const { filters } = state
+  const { allFilters, currentFilter } = filters
+  return {
+    allFilters,
+    currentFilter,
   }
 }

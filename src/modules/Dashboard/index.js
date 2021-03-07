@@ -1,3 +1,4 @@
+import Filters from '../../components/Filters'
 import Loader from '../../components/Loader'
 import Pagination from '../../components/Pagination'
 import {
@@ -8,12 +9,12 @@ import {
   Container,
 } from '../../styled/modules/Dashboard'
 import { tableColumns } from '../../utils/helpers'
-// import LaunchDetails from '../LaunchDetails'
 import Launches from './Launches'
 
 function Dashboard() {
   return (
     <Container>
+      <Filters />
       <DashboardWrapper>
         <DashboardTableHead>
           <TableRow>
@@ -27,7 +28,6 @@ function Dashboard() {
         <Launches />
       </DashboardWrapper>
       <Pagination />
-      {/* <LaunchDetails /> */}
       <Loader />
     </Container>
   )
