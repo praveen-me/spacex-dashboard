@@ -1,4 +1,6 @@
+import { useSelector } from 'react-redux'
 import svg from '../assets/svg'
+import { getPageStatus } from '../store/selectors/dashboard'
 import {
   PageBlock,
   PaginationIcon,
@@ -6,19 +8,26 @@ import {
 } from '../styled/components/Pagination'
 
 function Pagination() {
+  const { allPages, currentPage } = useSelector(getPageStatus)
+
+  if (!(allPages.length > 1)) return null
+
   return (
-    <PaginationWrapper>
-      <PageBlock>
-        <PaginationIcon src={svg.arrowLeft} />
-      </PageBlock>
-      <PageBlock>2</PageBlock>
-      <PageBlock>3</PageBlock>
-      <PageBlock>4</PageBlock>
-      <PageBlock>5</PageBlock>
-      <PageBlock last>
-        <PaginationIcon src={svg.arrowRight} />
-      </PageBlock>
-    </PaginationWrapper>
+    <div style={{ textAlign: 'right' }}>
+      <PaginationWrapper>
+        <PageBlock>
+          <PaginationIcon src={svg.arrowLeft} />
+        </PageBlock>
+        {allPages.map((page) => (
+          <PageBlock key={page} currentPage={page === currentPage}>
+            {page}
+          </PageBlock>
+        ))}
+        <PageBlock last>
+          <PaginationIcon src={svg.arrowRight} />
+        </PageBlock>
+      </PaginationWrapper>
+    </div>
   )
 }
 

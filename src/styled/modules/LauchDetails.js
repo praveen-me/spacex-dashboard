@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const DetailsOverlay = styled.div`
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -58,6 +58,10 @@ export const LaunchMission = styled.p`
 `
 
 export const LaunchInfoLinks = styled.div``
+
+export const InfoLinkWrapper = styled.a`
+  cursor: pointer;
+`
 
 export const LaunchInfoLink = styled.img`
   margin-right: 8px;

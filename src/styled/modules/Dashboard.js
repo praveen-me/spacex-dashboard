@@ -12,6 +12,7 @@ const DataColumn = styled.td`
 export const Container = styled.main`
   width: 960px;
   margin: 3rem auto;
+  position: relative;
 `
 
 export const DashboardWrapper = styled.table`
@@ -21,6 +22,7 @@ export const DashboardWrapper = styled.table`
   border-radius: 6px;
   overflow: hidden;
   display: block;
+  min-height: 440px;
 `
 export const DashboardTableHead = styled.thead`
   background: #f4f5f7;
@@ -33,6 +35,7 @@ export const TableRow = styled.tr`
   justify-content: space-between;
   flex: 1;
   height: 40px;
+  ${(props) => props.showCursor && `cursor: pointer`}
 `
 
 export const DashboardTableColumn = styled(DataColumn)`

@@ -15,9 +15,38 @@ export function getColumnWidth(type) {
     3: 120,
     4: 120,
     5: 50,
-    6: 92,
+    6: 98,
     7: 92,
   }
 
   return sizes[type]
+}
+
+export function getLaunchStatus(success) {
+  let launchStatus = 'Upcoming'
+
+  if (success) {
+    launchStatus = 'Success'
+  } else if (success === false) {
+    launchStatus = 'Failed'
+  }
+
+  return launchStatus
+}
+
+export function getDate(dateStr) {
+  const date = new Date(dateStr)
+
+  const datePart = date
+    .toLocaleDateString(undefined, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+    .split(',')[1]
+
+  const timePart = date.toLocaleTimeString().slice(0, -3)
+
+  return `${datePart} at ${timePart}`
 }

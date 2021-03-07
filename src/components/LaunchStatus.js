@@ -7,7 +7,7 @@ function LaunchStatus(props) {
 
   return (
     <StatusWrapper type={type}>
-      <StatusText type={type}>Success</StatusText>
+      <StatusText type={type}>{type}</StatusText>
     </StatusWrapper>
   )
 }
