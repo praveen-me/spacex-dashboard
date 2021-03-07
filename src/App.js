@@ -1,4 +1,5 @@
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
 import DashboardPage from './pages/Dashboard'
 import store from './store'
@@ -9,7 +10,9 @@ function App() {
     <Provider store={store}>
       <GlobalStyles />
       <Header />
-      <DashboardPage />
+      <Router>
+        <Route path="/" exact component={DashboardPage} />
+      </Router>
     </Provider>
   )
 }
