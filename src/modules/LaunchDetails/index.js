@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+import { useRef } from 'react'
 import svg from '../../assets/svg'
 import LaunchStatus from '../../components/LaunchStatus'
 import {
@@ -14,50 +16,147 @@ import {
   LaunchDescription,
   CloseModal,
   CloseIcon,
+  InfoLinkWrapper,
 } from '../../styled/modules/LauchDetails'
+import { getDate, getLaunchStatus } from '../../utils/helpers'
 import DetailStrip from './DetailStrip'
 
-function LaunchDetails() {
+function LaunchDetails(props) {
+  const wrapperRef = useRef(null)
+
+  console.log({ props })
+
+  const {
+    onDismiss,
+    flight_number,
+    date_utc,
+    launchpad,
+    success,
+    payloads,
+    name,
+    rocket,
+    details,
+    links,
+  } = props
+
+  function handleOnClick(event) {
+    if (event.target !== wrapperRef.current) return
+
+    onDismiss()
+  }
+
+  const launchImgUrl = links?.patch?.small
+
+  const wikiPediaLink = links?.wikipedia
+  const nasaLink = links?.presskit
+  const webcastLink = links?.webcast
+
+  const dataRows = [
+    {
+      label: 'Flight Number',
+      value: flight_number,
+    },
+    {
+      label: 'Mission Name',
+      value: name,
+    },
+    {
+      label: 'Rocket Engine Type',
+      value: rocket?.engines?.type,
+    },
+    {
+      label: 'Rocket Name',
+      value: rocket?.name,
+    },
+    {
+      label: 'Manufacturer',
+      value: rocket?.company,
+    },
+    {
+      label: 'Nationality',
+      value: rocket?.country,
+    },
+    {
+      label: 'Launch Date',
+      value: getDate(date_utc),
+    },
+    {
+      label: 'Payload Type',
+      value: payloads[0]?.name,
+    },
+    {
+      label: 'Orbit',
+      value: payloads[0]?.orbit,
+    },
+    {
+      label: 'Launch Site',
+      value: launchpad.name,
+    },
+  ]
+
   return (
-    <DetailsOverlay>
+    <DetailsOverlay ref={wrapperRef} onClick={handleOnClick}>
       <DetailsModal>
-        <CloseModal>
+        <CloseModal onClick={onDismiss}>
           <CloseIcon src={svg.close} />
         </CloseModal>
         <LaunchInfo>
-          <LaunchImage src="https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png" />
+          {launchImgUrl && <LaunchImage src={launchImgUrl} />}
+
           <LaunchDetailsWrapper>
             <LaunchInfoStrip>
-              <LaunchTitle>CRS -1</LaunchTitle>
-              <LaunchStatus type="success" />
+              <LaunchTitle>{name}</LaunchTitle>
+              <LaunchStatus type={getLaunchStatus(success)} />
             </LaunchInfoStrip>
-            <LaunchMission>Falcon 9</LaunchMission>
+            <LaunchMission>{rocket.name}</LaunchMission>
             <LaunchInfoLinks>
-              <LaunchInfoLink src={svg.nasa} />
-              <LaunchInfoLink src={svg.wikipedia} />
-              <LaunchInfoLink src={svg.youtube} />
+              {nasaLink && (
+                <InfoLinkWrapper target="_blank" href={nasaLink}>
+                  <LaunchInfoLink src={svg.nasa} />
+                </InfoLinkWrapper>
+              )}
+              {wikiPediaLink && (
+                <InfoLinkWrapper target="_blank" href={wikiPediaLink}>
+                  <LaunchInfoLink src={svg.wikipedia} />
+                </InfoLinkWrapper>
+              )}
+              {webcastLink && (
+                <InfoLinkWrapper target="_blank" href={webcastLink}>
+                  <LaunchInfoLink src={svg.youtube} />
+                </InfoLinkWrapper>
+              )}
             </LaunchInfoLinks>
           </LaunchDetailsWrapper>
         </LaunchInfo>
-        <LaunchDescription>
-          CRS-1 successful, but the secondary payload was inserted into
-          abnormally low orbit and lost due to Falcon 9 boost stage engine
-          failure, ISS visiting vehicle safety rules, and the primary payload
-          owner contractual right to decline a second ignition of the second
-          stage under some condition. Wikipedia
-        </LaunchDescription>
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" />
-        <DetailStrip title="Flight Number" value="9" noBorder />
+        {details && <LaunchDescription>{details}</LaunchDescription>}
+
+        {dataRows.map((row, index) =>
+          row.value ? (
+            <DetailStrip
+              title={row.label}
+              value={row.value}
+              noBorder={index === dataRows.length - 1}
+            />
+          ) : (
+            <></>
+          )
+        )}
       </DetailsModal>
     </DetailsOverlay>
   )
+}
+
+LaunchDetails.propTypes = {
+  onDismiss: PropTypes.func,
+  flight_number: PropTypes.number,
+  date_utc: PropTypes.string,
+  launchpad: PropTypes.oneOfType([PropTypes.object]),
+  success: PropTypes.bool,
+  payloads: PropTypes.oneOfType([PropTypes.object]),
+  name: PropTypes.string,
+  rocket: PropTypes.oneOfType([PropTypes.object]),
+  details: PropTypes.string,
+  links: PropTypes.oneOfType([PropTypes.object]),
 }
 
 export default LaunchDetails
