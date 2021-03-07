@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useDispatch, useSelector } from 'react-redux'
-import { changeFilter } from '../store/actions/filters'
-import { getLaunchesRequested } from '../store/actions/launches'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { getFiltersState } from '../store/selectors/dashboard'
 import {
   Filter,
@@ -12,15 +11,13 @@ import {
 
 function Filters() {
   const { currentFilter, allFilters } = useSelector(getFiltersState)
-
-  const dispatch = useDispatch()
+  const history = useHistory()
 
   function handleOnChange(event) {
     const { value } = event.target
 
     if (value !== currentFilter) {
-      dispatch(getLaunchesRequested({ filter: value }))
-      dispatch(changeFilter(value))
+      history.push(`/?filter=${value}`)
     }
   }
 
