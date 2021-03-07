@@ -10,16 +10,28 @@ const initState = {
 export default function lauchesReducer(state = initState, action) {
   switch (action.type) {
     case launchesActionTypes.GET_LAUNCHES: {
-      const { docs = [], page = 0, totalPages = 0 } = action.payload.data || {}
+      const { filter, launches } = action.payload.data
+
+      const { docs = [], page = 0, totalPages = 0 } = launches || {}
 
       return {
         ...state,
         data: {
           ...state.data,
-          [page]: docs,
+          [filter]: {
+            ...state.data[filter],
+            [page]: docs,
+          },
         },
         totalPages,
         currentPage: page,
+      }
+    }
+
+    case launchesActionTypes.CHANGE_PAGE_NO: {
+      return {
+        ...state,
+        currentPage: action.payload.data,
       }
     }
 

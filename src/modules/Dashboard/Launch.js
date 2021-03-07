@@ -29,7 +29,7 @@ function Launch(props) {
         <LaunchData sizeNo={2}>{getDate(date_utc)}</LaunchData>
         <LaunchData sizeNo={3}>{launchpad.name}</LaunchData>
         <LaunchData sizeNo={4}>{name}</LaunchData>
-        <LaunchData sizeNo={5}>{payloads[0].orbit}</LaunchData>
+        <LaunchData sizeNo={5}>{payloads[0]?.orbit || null}</LaunchData>
         <LaunchData sizeNo={6}>
           <LaunchStatus type={getLaunchStatus(success)} />
         </LaunchData>
@@ -48,7 +48,7 @@ Launch.propTypes = {
   date_utc: PropTypes.string,
   launchpad: PropTypes.oneOfType([PropTypes.object]),
   success: PropTypes.bool,
-  payloads: PropTypes.oneOfType([PropTypes.object]),
+  payloads: PropTypes.oneOfType([PropTypes.object, undefined, null]),
   name: PropTypes.string,
   rocket: PropTypes.oneOfType([PropTypes.object]),
 }

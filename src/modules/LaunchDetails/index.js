@@ -24,8 +24,6 @@ import DetailStrip from './DetailStrip'
 function LaunchDetails(props) {
   const wrapperRef = useRef(null)
 
-  console.log({ props })
-
   const {
     onDismiss,
     flight_number,

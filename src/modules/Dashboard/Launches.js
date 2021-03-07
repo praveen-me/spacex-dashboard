@@ -11,7 +11,7 @@ function Launches() {
       {launchesData &&
         launchesData.map((launch) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <Launch {...launch} />
+          <Launch {...launch} key={launch.flight_number} />
         ))}
     </LaunchesWrapper>
   )
