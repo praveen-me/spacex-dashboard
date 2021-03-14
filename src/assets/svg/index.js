@@ -6,6 +6,8 @@ import YoutubeLogo from './YoutubeLogo.svg'
 import NasaLogo from './NasaLogo.svg'
 import WikipediaLogo from './WikipediaLogo.svg'
 import Close from './Close.svg'
+import CalenderIcon from './CalenderIcon.svg'
+import FunnelIcon from './FunnelIcon.svg'
 
 export default {
   arrowLeft: ArrowLeft,
@@ -16,4 +18,6 @@ export default {
   nasa: NasaLogo,
   wikipedia: WikipediaLogo,
   close: Close,
+  calender: CalenderIcon,
+  funnel: FunnelIcon,
 }

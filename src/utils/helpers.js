@@ -50,3 +50,23 @@ export function getDate(dateStr) {
 
   return `${datePart} at ${timePart}`
 }
+
+export function calculatePastDate(n, type) {
+  let d = new Date()
+
+  if (type === 'year') {
+    d.setFullYear(d.getFullYear() - n)
+  }
+
+  if (type === 'month') {
+    d.setMonth(d.getMonth() - n)
+  }
+
+  if (type === 'week') {
+    const totalMillseconds = n * 7 * 24 * 60 * 60 * 1000
+
+    d = d.getTime() - totalMillseconds
+  }
+
+  return new Date(d)
+}
