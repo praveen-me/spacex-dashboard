@@ -27,3 +27,12 @@ export function getFiltersState(state) {
     currentFilter,
   }
 }
+
+export function getDateFilters(state) {
+  const { filters } = state
+  const { dateFilters, currentDateFilter } = filters
+  return {
+    dateFilters,
+    currentDateFilter,
+  }
+}

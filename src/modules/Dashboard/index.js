@@ -1,3 +1,4 @@
+import FilterByDate from '../../components/FilterByDate'
 import Filters from '../../components/Filters'
 import Loader from '../../components/Loader'
 import Pagination from '../../components/Pagination'
@@ -7,6 +8,7 @@ import {
   DashboardWrapper,
   TableRow,
   Container,
+  FiltersWrapper,
 } from '../../styled/modules/Dashboard'
 import { tableColumns } from '../../utils/helpers'
 import Launches from './Launches'
@@ -14,7 +16,10 @@ import Launches from './Launches'
 function Dashboard() {
   return (
     <Container>
-      <Filters />
+      <FiltersWrapper>
+        <FilterByDate />
+        <Filters />
+      </FiltersWrapper>
       <DashboardWrapper>
         <DashboardTableHead>
           <TableRow>

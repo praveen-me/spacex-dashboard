@@ -51,3 +51,10 @@ export const LaunchesWrapper = styled.tbody`
 export const LaunchData = styled(DataColumn)`
   color: #1f2937;
 `
+
+export const FiltersWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3rem;
+`
