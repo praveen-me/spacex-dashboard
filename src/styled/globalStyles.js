@@ -65,16 +65,28 @@ const GlobalStyles = createGlobalStyle`
    /*
     Global Styles
    */
-  body {
-    font-family: 'Inter', sans-serif;
-  }
+    body {
+        font-family: 'Inter', sans-serif;
+    }
 
-  button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer
-  }
+    button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    /* Calender */
+    .DateRangePicker__CalendarSelection {
+        background-color: #313131;
+        border: 1px solid #404040;
+    }
+
+    .DateRangePicker__CalendarHighlight--single {
+        background-color: #fff;
+        border: 1px solid #404040;
+    }
 `
 
 export default GlobalStyles

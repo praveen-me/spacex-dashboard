@@ -1,5 +1,9 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import DateRangePicker from 'react-daterange-picker'
+import 'react-daterange-picker/dist/css/react-calendar.css'
+
 import svg from '../assets/svg'
 import { getDateFilters } from '../store/selectors/dashboard'
 import {
@@ -11,14 +15,30 @@ import {
   FilterByDateIcon,
   FilterByDateOverlay,
 } from '../styled/components/FilterByDate'
+import { changeDateFilter } from '../store/actions/filters'
 
 function FilterByDate() {
-  const [showFilters, setShowFilters] = useState(false)
-
   const { currentDateFilter, dateFilters } = useSelector(getDateFilters)
+  const dispatch = useDispatch()
+  const currentFilter = dateFilters.find(
+    (filter) => filter.label === currentDateFilter
+  )
 
-  function onFilterClick() {
-    console.log(currentDateFilter, setShowFilters)
+  const [showFilters, setShowFilters] = useState(false)
+  const [customDates, setCustomDates] = useState(null)
+
+  useEffect(() => {
+    const initialDates = !currentFilter.dates.start
+      ? null
+      : moment.range(
+          moment(currentFilter.dates.end),
+          moment(currentFilter.dates.start)
+        )
+    setCustomDates(initialDates)
+  }, [currentDateFilter])
+
+  function onFilterClick(filter) {
+    dispatch(changeDateFilter(filter))
   }
 
   function toggleFilter() {
@@ -35,17 +55,32 @@ function FilterByDate() {
     )
   }
 
+  function handleDateSelect(dates) {
+    console.log(dates)
+
+    setCustomDates(dates)
+  }
+
   return (
     <FilterByDateOverlay>
       <FilterByDateContainer>
         <DateFiltersByLabelContainer>
           {dateFilters.map((filter) => (
-            <DateFiltersByLabel onClick={onFilterClick}>
+            <DateFiltersByLabel
+              onClick={() => onFilterClick(filter.label)}
+              key={filter.label}
+              active={filter.label === currentDateFilter}
+            >
               {filter.label}
             </DateFiltersByLabel>
           ))}
         </DateFiltersByLabelContainer>
-        <div>Some time</div>
+        <DateRangePicker
+          numberOfCalendars={2}
+          selectionType="range"
+          onSelect={handleDateSelect}
+          value={customDates}
+        />
       </FilterByDateContainer>
     </FilterByDateOverlay>
   )

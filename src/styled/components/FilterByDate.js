@@ -16,7 +16,6 @@ export const FilterByDateOverlay = styled.div`
 `
 
 export const FilterByDateContainer = styled.div`
-  width: 550px;
   padding: 2rem;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
@@ -35,6 +34,11 @@ export const DateFiltersByLabelContainer = styled.div`
 export const DateFiltersByLabel = styled.button`
   text-align: left;
   padding: 0.5rem;
+  ${(props) => props.active && `background: #ddd;`}
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const CurrentFilterWrapper = styled.button`

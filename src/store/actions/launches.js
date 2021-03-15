@@ -25,23 +25,27 @@ function changeCurrentPage(pageNo) {
   }
 }
 
-export const getLaunchesRequested = ({ page, filter } = {}) => async (
-  dispatch,
-  getState
-) => {
+export const getLaunchesRequested = ({
+  page,
+  filter,
+  dateFilter,
+} = {}) => async (dispatch, getState) => {
   const { launches, filters } = getState()
   const { limit, currentPage } = launches
+  const { dateFilters, currentDateFilter } = filters
 
   const searchByFilter = filter || filters.currentFilter
   const searchQuery = filterQueries[searchByFilter]
   let pageNo = page || currentPage
+  const filterByDate = dateFilter || currentDateFilter
 
   if (filter && filter !== filters.currentFilter) {
     dispatch(changeCurrentPage(1))
     pageNo = 1
   } else if (
     launches.data[searchByFilter] &&
-    launches.data[searchByFilter][page]
+    launches.data[searchByFilter][filterByDate] &&
+    launches.data[searchByFilter][filterByDate][page]
   ) {
     dispatch(changeCurrentPage(page))
     return
@@ -59,6 +63,7 @@ export const getLaunchesRequested = ({ page, filter } = {}) => async (
       dispatchSetLaunches({
         launches: data,
         filter: searchByFilter,
+        dateFilter: filterByDate,
       })
     )
   } catch (e) {

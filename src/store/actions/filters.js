@@ -1,5 +1,6 @@
 export const filterActionTypes = {
   CHANGE_FILTER: 'CHANGE_FILTER',
+  CHANGE_DATE_FILTER: 'CHANGE_DATE_FILTER',
 }
 
 export const filterQueries = {
@@ -18,6 +19,13 @@ export const filterQueries = {
 export function changeFilter(filter) {
   return {
     type: filterActionTypes.CHANGE_FILTER,
+    payload: filter,
+  }
+}
+
+export function changeDateFilter(filter) {
+  return {
+    type: filterActionTypes.CHANGE_DATE_FILTER,
     payload: filter,
   }
 }

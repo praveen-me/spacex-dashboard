@@ -10,7 +10,7 @@ const initState = {
 export default function lauchesReducer(state = initState, action) {
   switch (action.type) {
     case launchesActionTypes.GET_LAUNCHES: {
-      const { filter, launches } = action.payload.data
+      const { filter, launches, dateFilter } = action.payload.data
 
       const { docs = [], page = 0, totalPages = 0 } = launches || {}
 
@@ -19,8 +19,11 @@ export default function lauchesReducer(state = initState, action) {
         data: {
           ...state.data,
           [filter]: {
-            ...state.data[filter],
-            [page]: docs,
+            ...(state.data[filter] || {}),
+            [dateFilter]: {
+              ...((state.data[filter] && state.data[filter][dateFilter]) || {}),
+              [page]: docs,
+            },
           },
         },
         totalPages,
