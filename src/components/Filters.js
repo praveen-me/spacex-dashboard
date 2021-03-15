@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import svg from '../../assets/svg'
-import { getFiltersState } from '../../store/selectors/dashboard'
+import svg from '../assets/svg'
+import { getFiltersState } from '../store/selectors/dashboard'
 import {
   Filter,
   FiltersContainer,
@@ -11,7 +11,7 @@ import {
   FiltersWrapper,
   Option,
   OptionsWrapper,
-} from '../../styled/components/Filters'
+} from '../styled/components/Filters'
 
 function Filters() {
   const [showFilter, setShowFilter] = useState(false)

@@ -68,5 +68,7 @@ export function calculatePastDate(n, type) {
     d = d.getTime() - totalMillseconds
   }
 
-  return new Date(d)
+  const revisedDated = new Date(d)
+
+  return revisedDated
 }
