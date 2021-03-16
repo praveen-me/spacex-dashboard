@@ -1,6 +1,6 @@
 import { getLaunches } from '../../utils/api'
 import { toggleLoading } from './loading'
-import { filterQueries } from './filters'
+import { changeDateFilter, filterQueries } from './filters'
 
 export const launchesActionTypes = {
   GET_LAUNCHES: 'GET_LAUNCHES',
@@ -37,26 +37,55 @@ export const getLaunchesRequested = ({
   const searchByFilter = filter || filters.currentFilter
   const searchQuery = filterQueries[searchByFilter]
   let pageNo = page || currentPage
-  const filterByDate = dateFilter || currentDateFilter
+  let filterByDate = dateFilter || currentDateFilter
 
   if (filter && filter !== filters.currentFilter) {
     dispatch(changeCurrentPage(1))
     pageNo = 1
-  } else if (
+    filterByDate = dateFilters[0].label
+    dispatch(changeDateFilter(filterByDate))
+  } else if (dateFilter && dateFilter !== filters.currentDateFilter) {
+    dispatch(changeCurrentPage(1))
+    pageNo = 1
+  }
+
+  console.log(searchByFilter, filterByDate, pageNo)
+
+  if (
     launches.data[searchByFilter] &&
     launches.data[searchByFilter][filterByDate] &&
-    launches.data[searchByFilter][filterByDate][page]
+    launches.data[searchByFilter][filterByDate].docs[pageNo]
   ) {
-    dispatch(changeCurrentPage(page))
+    dispatch(changeCurrentPage(pageNo))
     return
+  }
+
+  const currentDateFilterData = dateFilters.find(
+    (f) => f.label === filterByDate
+  )
+
+  let dateQuery = {}
+  if (currentDateFilterData) {
+    const { dates } = currentDateFilterData
+
+    if (dates?.start && dates?.end) {
+      dateQuery = {
+        date_utc: {
+          $gte: dates.start,
+          $lte: dates.end,
+        },
+      }
+    }
   }
 
   dispatch(toggleLoading())
   try {
+    const query = { ...searchQuery, ...dateQuery }
+
     const { data } = await getLaunches({
       page: pageNo,
       limit,
-      query: searchQuery,
+      query,
     })
 
     dispatch(

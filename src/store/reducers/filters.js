@@ -5,50 +5,50 @@ const dateFilters = [
   {
     label: 'All Launches By Date',
     dates: {
-      start: null,
       end: null,
+      start: null,
     },
   },
   {
     label: 'Past Week',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(1, 'week'),
+      end: calculatePastDate(),
+      start: calculatePastDate(1, 'week'),
     },
   },
   {
     label: 'Past Month',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(1, 'month'),
+      end: calculatePastDate(),
+      start: calculatePastDate(1, 'month'),
     },
   },
   {
     label: 'Past 3 Months',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(3, 'month'),
+      end: calculatePastDate(),
+      start: calculatePastDate(3, 'month'),
     },
   },
   {
     label: 'Past 6 Months',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(6, 'month'),
+      end: calculatePastDate(),
+      start: calculatePastDate(6, 'month'),
     },
   },
   {
     label: 'Past Year',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(1, 'year'),
+      end: calculatePastDate(),
+      start: calculatePastDate(1, 'year'),
     },
   },
   {
     label: 'Past 2 Years',
     dates: {
-      start: calculatePastDate(),
-      end: calculatePastDate(2, 'year'),
+      end: calculatePastDate(),
+      start: calculatePastDate(2, 'year'),
     },
   },
 ]

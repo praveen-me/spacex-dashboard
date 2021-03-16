@@ -2,19 +2,28 @@ export function getAllLaunches(state) {
   const { launches, filters } = state
 
   const { currentPage, data } = launches
-  const { currentFilter } = filters
+  const { currentFilter, currentDateFilter } = filters
 
-  return data[currentFilter] && data[currentFilter][currentPage]
+  return (
+    data[currentFilter] &&
+    data[currentFilter][currentDateFilter] &&
+    data[currentFilter][currentDateFilter]?.docs[currentPage]
+  )
 }
 
 export function getPageStatus(state) {
-  const { launches } = state
+  const { launches, filters } = state
 
-  const { totalPages, currentPage } = launches
+  const { data, currentPage } = launches
+  const { currentFilter, currentDateFilter } = filters
 
-  const [, ...result] = Array(totalPages + 1).keys()
+  const [, ...result] = Array(
+    data[currentFilter] && data[currentFilter][currentDateFilter]
+      ? data[currentFilter][currentDateFilter]?.docs.totalPages + 1
+      : 0
+  ).keys()
   return {
-    allPages: result,
+    allPages: result.length ? result : [],
     currentPage,
   }
 }

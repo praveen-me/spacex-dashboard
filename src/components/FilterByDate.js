@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import DateRangePicker from 'react-daterange-picker'
@@ -16,6 +16,7 @@ import {
   FilterByDateOverlay,
 } from '../styled/components/FilterByDate'
 import { changeDateFilter } from '../store/actions/filters'
+import { getLaunchesRequested } from '../store/actions/launches'
 
 function FilterByDate() {
   const { currentDateFilter, dateFilters } = useSelector(getDateFilters)
@@ -23,6 +24,7 @@ function FilterByDate() {
   const currentFilter = dateFilters.find(
     (filter) => filter.label === currentDateFilter
   )
+  const wrapperRef = useRef(null)
 
   const [showFilters, setShowFilters] = useState(false)
   const [customDates, setCustomDates] = useState(null)
@@ -37,52 +39,57 @@ function FilterByDate() {
     setCustomDates(initialDates)
   }, [currentDateFilter])
 
-  function onFilterClick(filter) {
-    dispatch(changeDateFilter(filter))
-  }
-
   function toggleFilter() {
     setShowFilters(!showFilters)
   }
 
-  if (!showFilters) {
-    return (
+  function onFilterClick(filter) {
+    dispatch(getLaunchesRequested({ dateFilter: filter }))
+    dispatch(changeDateFilter(filter))
+    toggleFilter()
+  }
+
+  function handleDateSelect(dates) {
+    setCustomDates(dates)
+  }
+
+  function handleDismiss(event) {
+    if (event.target !== wrapperRef.current) return
+
+    toggleFilter()
+  }
+
+  return (
+    <>
       <CurrentFilterWrapper onClick={toggleFilter}>
         <FilterByDateIcon src={svg.calender} />
         <CurrentFilter>{currentDateFilter}</CurrentFilter>
         <FilterByDateIcon src={svg.arrowRight} rotate="90deg" />
       </CurrentFilterWrapper>
-    )
-  }
-
-  function handleDateSelect(dates) {
-    console.log(dates)
-
-    setCustomDates(dates)
-  }
-
-  return (
-    <FilterByDateOverlay>
-      <FilterByDateContainer>
-        <DateFiltersByLabelContainer>
-          {dateFilters.map((filter) => (
-            <DateFiltersByLabel
-              onClick={() => onFilterClick(filter.label)}
-              key={filter.label}
-              active={filter.label === currentDateFilter}
-            >
-              {filter.label}
-            </DateFiltersByLabel>
-          ))}
-        </DateFiltersByLabelContainer>
-        <DateRangePicker
-          numberOfCalendars={2}
-          selectionType="range"
-          onSelect={handleDateSelect}
-          value={customDates}
-        />
-      </FilterByDateContainer>
-    </FilterByDateOverlay>
+      {showFilters && (
+        <FilterByDateOverlay onClick={handleDismiss} ref={wrapperRef}>
+          <FilterByDateContainer>
+            <DateFiltersByLabelContainer>
+              {dateFilters.map((filter) => (
+                <DateFiltersByLabel
+                  onClick={() => onFilterClick(filter.label)}
+                  key={filter.label}
+                  active={filter.label === currentDateFilter}
+                >
+                  {filter.label}
+                </DateFiltersByLabel>
+              ))}
+            </DateFiltersByLabelContainer>
+            <DateRangePicker
+              numberOfCalendars={2}
+              selectionType="range"
+              onSelect={handleDateSelect}
+              value={customDates}
+            />
+          </FilterByDateContainer>
+        </FilterByDateOverlay>
+      )}
+    </>
   )
 }
 

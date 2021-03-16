@@ -22,11 +22,16 @@ export default function lauchesReducer(state = initState, action) {
             ...(state.data[filter] || {}),
             [dateFilter]: {
               ...((state.data[filter] && state.data[filter][dateFilter]) || {}),
-              [page]: docs,
+              docs: {
+                ...((state.data[filter] &&
+                  state.data[filter][dateFilter]?.docs) ||
+                  {}),
+                [page]: docs,
+                totalPages,
+              },
             },
           },
         },
-        totalPages,
         currentPage: page,
       }
     }
