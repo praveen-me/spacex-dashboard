@@ -43,6 +43,10 @@ export const DateFiltersByLabel = styled.button`
 
 export const CurrentFilterWrapper = styled.button`
   display: flex;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export const CurrentFilter = styled.p`

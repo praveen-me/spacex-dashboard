@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Dashboard from '../modules/Dashboard'
-import { changeFilter } from '../store/actions/filters'
+import { changeDateFilter, changeFilter } from '../store/actions/filters'
 import { getLaunchesRequested } from '../store/actions/launches'
 import useQuery from '../utils/hooks/useQuery'
 
@@ -11,18 +11,25 @@ function DashboardPage() {
 
   useEffect(() => {
     const filter = query.get('filter')
+    const dateFilter = query.get('dateFilter')
 
-    if (!filter) {
+    if (!filter && !dateFilter) {
       dispatch(getLaunchesRequested())
     }
   }, [])
 
   useEffect(() => {
     const filter = query.get('filter')
+    const dateFilter = query.get('dateFilter')
+
+    dispatch(getLaunchesRequested({ filter, dateFilter }))
 
     if (filter) {
-      dispatch(getLaunchesRequested({ filter }))
       dispatch(changeFilter(filter))
+    }
+
+    if (dateFilter) {
+      dispatch(changeDateFilter(dateFilter))
     }
   }, [query])
 
