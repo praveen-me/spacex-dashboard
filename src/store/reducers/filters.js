@@ -4,6 +4,7 @@ import { filterActionTypes } from '../actions/filters'
 const dateFilters = [
   {
     label: 'All Launches By Date',
+    value: 'all',
     dates: {
       end: null,
       start: null,
@@ -11,6 +12,7 @@ const dateFilters = [
   },
   {
     label: 'Past Week',
+    value: 'past_week',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(1, 'week'),
@@ -18,6 +20,7 @@ const dateFilters = [
   },
   {
     label: 'Past Month',
+    value: 'past_month',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(1, 'month'),
@@ -25,6 +28,7 @@ const dateFilters = [
   },
   {
     label: 'Past 3 Months',
+    value: 'past_3_month',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(3, 'month'),
@@ -32,6 +36,7 @@ const dateFilters = [
   },
   {
     label: 'Past 6 Months',
+    value: 'past_6_month',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(6, 'month'),
@@ -39,6 +44,7 @@ const dateFilters = [
   },
   {
     label: 'Past Year',
+    value: 'past_year',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(1, 'year'),
@@ -46,6 +52,7 @@ const dateFilters = [
   },
   {
     label: 'Past 2 Years',
+    value: 'past_2_year',
     dates: {
       end: calculatePastDate(),
       start: calculatePastDate(2, 'year'),
@@ -76,7 +83,7 @@ const initialState = {
   currentFilter: 'all',
   allFilters,
   dateFilters,
-  currentDateFilter: dateFilters[0].label,
+  currentDateFilter: 'all',
   dataByCustomDates: false,
 }
 

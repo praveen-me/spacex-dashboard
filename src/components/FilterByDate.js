@@ -26,13 +26,13 @@ import useQuery from '../utils/hooks/useQuery'
 import { getLaunchesByCustomDates } from '../store/actions/launches'
 
 function FilterByDate() {
-  const { currentDateFilter, dateFilters } = useSelector(getDateFilters)
+  const { currentDateFilter, dateFilters, currentFilterData } = useSelector(
+    getDateFilters
+  )
   const isLauchesByCustomDates = useSelector(isLaunchesByCustomDates)
 
   const dispatch = useDispatch()
-  const currentFilter = dateFilters.find(
-    (filter) => filter.label === currentDateFilter
-  )
+
   const wrapperRef = useRef(null)
 
   const [showFilters, setShowFilters] = useState(false)
@@ -42,14 +42,14 @@ function FilterByDate() {
   const query = useQuery()
 
   useEffect(() => {
-    const initialDates = !currentFilter.dates.start
+    const initialDates = !currentFilterData.dates.start
       ? null
       : moment.range(
-          moment(currentFilter.dates.start),
-          moment(currentFilter.dates.end)
+          moment(currentFilterData.dates.start),
+          moment(currentFilterData.dates.end)
         )
     setCustomDates(initialDates)
-  }, [currentDateFilter])
+  }, [currentFilterData])
 
   function toggleFilter() {
     setShowFilters(!showFilters)
@@ -102,7 +102,7 @@ function FilterByDate() {
     <>
       <CurrentFilterWrapper onClick={toggleFilter}>
         <FilterByDateIcon src={svg.calender} />
-        <CurrentFilter>{currentDateFilter}</CurrentFilter>
+        <CurrentFilter>{currentFilterData.label}</CurrentFilter>
         <FilterByDateIcon src={svg.arrowRight} rotate="90deg" />
       </CurrentFilterWrapper>
       {showFilters && (
@@ -111,7 +111,7 @@ function FilterByDate() {
             <DateFiltersByLabelContainer>
               {dateFilters.map((filter) => (
                 <DateFiltersByLabel
-                  onClick={() => onFilterClick(filter.label)}
+                  onClick={() => onFilterClick(filter.value)}
                   key={filter.label}
                   active={filter.label === currentDateFilter}
                 >

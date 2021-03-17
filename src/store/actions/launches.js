@@ -72,7 +72,7 @@ export const getLaunchesRequested = ({
   }
 
   const currentDateFilterData = dateFilters.find(
-    (f) => f.label === filterByDate
+    (f) => f.value === filterByDate
   )
 
   let dateQuery = {}
