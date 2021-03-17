@@ -52,9 +52,14 @@ export function getFiltersState(state) {
 export function getDateFilters(state) {
   const { filters } = state
   const { dateFilters, currentDateFilter } = filters
+  const currentFilterData = dateFilters.find(
+    (filter) => filter.value === currentDateFilter
+  )
+
   return {
     dateFilters,
     currentDateFilter,
+    currentFilterData,
   }
 }
 
