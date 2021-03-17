@@ -77,6 +77,7 @@ const initialState = {
   allFilters,
   dateFilters,
   currentDateFilter: dateFilters[0].label,
+  dataByCustomDates: false,
 }
 
 export default function filtersReducer(state = initialState, action) {
@@ -92,6 +93,13 @@ export default function filtersReducer(state = initialState, action) {
       return {
         ...state,
         currentDateFilter: action.payload,
+      }
+    }
+
+    case filterActionTypes.TOGGLE_CUSTOM_FILTER_FLAG: {
+      return {
+        ...state,
+        dataByCustomDates: !state.dataByCustomDates,
       }
     }
 

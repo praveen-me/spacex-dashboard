@@ -58,3 +58,12 @@ export const FiltersWrapper = styled.div`
   align-items: center;
   padding-bottom: 3rem;
 `
+
+export const ListEmptyPara = styled.p`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  margin: 3rem 0;
+  color: #374151;
+`

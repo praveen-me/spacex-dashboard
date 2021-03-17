@@ -1,6 +1,6 @@
 import { getLaunches } from '../../utils/api'
 import { toggleLoading } from './loading'
-import { changeDateFilter, filterQueries } from './filters'
+import { filterQueries } from './filters'
 
 export const launchesActionTypes = {
   GET_LAUNCHES: 'GET_LAUNCHES',
@@ -37,19 +37,15 @@ export const getLaunchesRequested = ({
   const searchByFilter = filter || filters.currentFilter
   const searchQuery = filterQueries[searchByFilter]
   let pageNo = page || currentPage
-  let filterByDate = dateFilter || currentDateFilter
+  const filterByDate = dateFilter || currentDateFilter
 
-  if (filter && filter !== filters.currentFilter) {
-    dispatch(changeCurrentPage(1))
-    pageNo = 1
-    filterByDate = dateFilters[0].label
-    dispatch(changeDateFilter(filterByDate))
-  } else if (dateFilter && dateFilter !== filters.currentDateFilter) {
+  if (
+    (filter && filter !== filters.currentFilter) ||
+    (dateFilter && dateFilter !== filters.currentDateFilter)
+  ) {
     dispatch(changeCurrentPage(1))
     pageNo = 1
   }
-
-  console.log(searchByFilter, filterByDate, pageNo)
 
   if (
     launches.data[searchByFilter] &&
@@ -77,6 +73,8 @@ export const getLaunchesRequested = ({
       }
     }
   }
+
+  console.log({ dateQuery })
 
   dispatch(toggleLoading())
   try {

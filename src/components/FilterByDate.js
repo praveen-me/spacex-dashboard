@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
+import { useHistory } from 'react-router-dom'
+
 import DateRangePicker from 'react-daterange-picker'
+
 import 'react-daterange-picker/dist/css/react-calendar.css'
 
 import svg from '../assets/svg'
@@ -15,8 +18,8 @@ import {
   FilterByDateIcon,
   FilterByDateOverlay,
 } from '../styled/components/FilterByDate'
-import { changeDateFilter } from '../store/actions/filters'
-import { getLaunchesRequested } from '../store/actions/launches'
+import { toogleFilterByCustomDates } from '../store/actions/filters'
+import useQuery from '../utils/hooks/useQuery'
 
 function FilterByDate() {
   const { currentDateFilter, dateFilters } = useSelector(getDateFilters)
@@ -29,12 +32,15 @@ function FilterByDate() {
   const [showFilters, setShowFilters] = useState(false)
   const [customDates, setCustomDates] = useState(null)
 
+  const history = useHistory()
+  const query = useQuery()
+
   useEffect(() => {
     const initialDates = !currentFilter.dates.start
       ? null
       : moment.range(
-          moment(currentFilter.dates.end),
-          moment(currentFilter.dates.start)
+          moment(currentFilter.dates.start),
+          moment(currentFilter.dates.end)
         )
     setCustomDates(initialDates)
   }, [currentDateFilter])
@@ -44,13 +50,25 @@ function FilterByDate() {
   }
 
   function onFilterClick(filter) {
-    dispatch(getLaunchesRequested({ dateFilter: filter }))
-    dispatch(changeDateFilter(filter))
+    if (query.get('filter')) {
+      history.push(`/?filter=${query.get('filter')}&dateFilter=${filter}`)
+    } else {
+      history.push(`/?dateFilter=${filter}`)
+    }
+
     toggleFilter()
   }
 
   function handleDateSelect(dates) {
     setCustomDates(dates)
+
+    if (query.get('filter')) {
+      history.push(`/?filter=${query.get('filter')}&start=1&end=2`)
+    } else {
+      history.push(`/?start=1&end=2`)
+    }
+
+    dispatch(toogleFilterByCustomDates())
   }
 
   function handleDismiss(event) {

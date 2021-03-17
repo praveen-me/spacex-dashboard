@@ -5,9 +5,10 @@ export function getAllLaunches(state) {
   const { currentFilter, currentDateFilter } = filters
 
   return (
-    data[currentFilter] &&
-    data[currentFilter][currentDateFilter] &&
-    data[currentFilter][currentDateFilter]?.docs[currentPage]
+    (data[currentFilter] &&
+      data[currentFilter][currentDateFilter] &&
+      data[currentFilter][currentDateFilter]?.docs[currentPage]) ||
+    []
   )
 }
 
