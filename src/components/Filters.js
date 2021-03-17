@@ -12,12 +12,14 @@ import {
   Option,
   OptionsWrapper,
 } from '../styled/components/Filters'
+import useQuery from '../utils/hooks/useQuery'
 
 function Filters() {
   const [showFilter, setShowFilter] = useState(false)
 
   const { currentFilter, allFilters } = useSelector(getFiltersState)
   const history = useHistory()
+  const query = useQuery()
 
   function toggleFilter() {
     setShowFilter(!showFilter)
@@ -25,7 +27,12 @@ function Filters() {
 
   function handleOnChange(filter) {
     if (filter !== currentFilter) {
-      history.push(`/?filter=${filter}`)
+      if (query.get('dateFilter')) {
+        history.push(`/?filter=${filter}&dateFilter=${query.get('dateFilter')}`)
+      } else {
+        history.push(`/?filter=${filter}`)
+      }
+
       toggleFilter()
     }
   }

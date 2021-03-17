@@ -1,15 +1,25 @@
 import { getLaunches } from '../../utils/api'
 import { toggleLoading } from './loading'
-import { filterQueries } from './filters'
+import { filterQueries, toogleFilterByCustomDates } from './filters'
 
 export const launchesActionTypes = {
   GET_LAUNCHES: 'GET_LAUNCHES',
   CHANGE_PAGE_NO: 'CHANGE_PAGE_NO',
+  LAUCHES_BY_CUSTOM_DATES: 'LAUCHES_BY_CUSTOM_DATES',
 }
 
 function dispatchSetLaunches(data) {
   return {
     type: launchesActionTypes.GET_LAUNCHES,
+    payload: {
+      data,
+    },
+  }
+}
+
+function dispatchLaunchesByCustomDates(data = null) {
+  return {
+    type: launchesActionTypes.LAUCHES_BY_CUSTOM_DATES,
     payload: {
       data,
     },
@@ -32,12 +42,17 @@ export const getLaunchesRequested = ({
 } = {}) => async (dispatch, getState) => {
   const { launches, filters } = getState()
   const { limit, currentPage } = launches
-  const { dateFilters, currentDateFilter } = filters
+  const { dateFilters, currentDateFilter, dataByCustomDates } = filters
 
   const searchByFilter = filter || filters.currentFilter
   const searchQuery = filterQueries[searchByFilter]
   let pageNo = page || currentPage
   const filterByDate = dateFilter || currentDateFilter
+
+  if (dataByCustomDates) {
+    dispatchLaunchesByCustomDates()
+    dispatch(toogleFilterByCustomDates())
+  }
 
   if (
     (filter && filter !== filters.currentFilter) ||
@@ -91,6 +106,44 @@ export const getLaunchesRequested = ({
         launches: data,
         filter: searchByFilter,
         dateFilter: filterByDate,
+      })
+    )
+  } catch (e) {
+    console.log(e)
+  } finally {
+    dispatch(toggleLoading())
+  }
+}
+
+export const getLaunchesByCustomDates = ({
+  page,
+  start,
+  end,
+  filter,
+}) => async (dispatch, getState) => {
+  const { launches, filters } = getState()
+  const { limit, currentPage } = launches
+
+  try {
+    dispatch(toggleLoading())
+
+    const query = {
+      date_utc: {
+        $gte: start,
+        $lte: end,
+      },
+      ...filterQueries[filter || filters.currentFilter],
+    }
+
+    const { data } = await getLaunches({
+      page,
+      limit,
+      query,
+    })
+
+    dispatch(
+      dispatchLaunchesByCustomDates({
+        ...data,
       })
     )
   } catch (e) {
