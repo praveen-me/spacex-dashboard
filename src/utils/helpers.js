@@ -11,8 +11,8 @@ export const tableColumns = [
 export function getColumnWidth(type) {
   const sizes = {
     1: 32,
-    2: 144,
-    3: 120,
+    2: 180,
+    3: 100,
     4: 120,
     5: 50,
     6: 98,

@@ -8,7 +8,10 @@ import DateRangePicker from 'react-daterange-picker'
 import 'react-daterange-picker/dist/css/react-calendar.css'
 
 import svg from '../assets/svg'
-import { getDateFilters } from '../store/selectors/dashboard'
+import {
+  getDateFilters,
+  isLaunchesByCustomDates,
+} from '../store/selectors/dashboard'
 import {
   CurrentFilter,
   CurrentFilterWrapper,
@@ -20,9 +23,12 @@ import {
 } from '../styled/components/FilterByDate'
 import { toogleFilterByCustomDates } from '../store/actions/filters'
 import useQuery from '../utils/hooks/useQuery'
+import { getLaunchesByCustomDates } from '../store/actions/launches'
 
 function FilterByDate() {
   const { currentDateFilter, dateFilters } = useSelector(getDateFilters)
+  const isLauchesByCustomDates = useSelector(isLaunchesByCustomDates)
+
   const dispatch = useDispatch()
   const currentFilter = dateFilters.find(
     (filter) => filter.label === currentDateFilter
@@ -61,14 +67,29 @@ function FilterByDate() {
 
   function handleDateSelect(dates) {
     setCustomDates(dates)
-
-    if (query.get('filter')) {
-      history.push(`/?filter=${query.get('filter')}&start=1&end=2`)
-    } else {
-      history.push(`/?start=1&end=2`)
+    if (!isLauchesByCustomDates) {
+      dispatch(toogleFilterByCustomDates())
     }
 
-    dispatch(toogleFilterByCustomDates())
+    const startDate = dates.start.toISOString()
+    const endDate = dates.end.toISOString()
+
+    dispatch(
+      getLaunchesByCustomDates({
+        start: startDate,
+        end: endDate,
+      })
+    )
+
+    if (query.get('filter')) {
+      history.push(
+        `/?filter=${query.get('filter')}&start=${startDate}&end=${endDate}`
+      )
+    } else {
+      history.push(`/?start=${startDate}&end=${endDate}`)
+    }
+
+    toggleFilter()
   }
 
   function handleDismiss(event) {

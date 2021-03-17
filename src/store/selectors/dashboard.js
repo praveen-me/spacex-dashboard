@@ -1,8 +1,12 @@
 export function getAllLaunches(state) {
   const { launches, filters } = state
 
-  const { currentPage, data } = launches
-  const { currentFilter, currentDateFilter } = filters
+  const { currentPage, data, launchesByCustomDates } = launches
+  const { currentFilter, currentDateFilter, dataByCustomDates } = filters
+
+  if (dataByCustomDates) {
+    return launchesByCustomDates?.docs || []
+  }
 
   return (
     (data[currentFilter] &&
@@ -15,14 +19,21 @@ export function getAllLaunches(state) {
 export function getPageStatus(state) {
   const { launches, filters } = state
 
-  const { data, currentPage } = launches
-  const { currentFilter, currentDateFilter } = filters
+  const { data, currentPage, launchesByCustomDates } = launches
+  const { currentFilter, currentDateFilter, dataByCustomDates } = filters
 
-  const [, ...result] = Array(
-    data[currentFilter] && data[currentFilter][currentDateFilter]
-      ? data[currentFilter][currentDateFilter]?.docs.totalPages + 1
-      : 0
-  ).keys()
+  let pagesNo = 0
+
+  if (dataByCustomDates) {
+    pagesNo = launchesByCustomDates?.totalPages + 1 || 1
+  } else {
+    pagesNo =
+      data[currentFilter] && data[currentFilter][currentDateFilter]
+        ? data[currentFilter][currentDateFilter]?.docs.totalPages + 1
+        : 0
+  }
+
+  const [, ...result] = Array(pagesNo).keys()
   return {
     allPages: result.length ? result : [],
     currentPage,
@@ -45,4 +56,10 @@ export function getDateFilters(state) {
     dateFilters,
     currentDateFilter,
   }
+}
+
+export function isLaunchesByCustomDates(state) {
+  const { filters } = state
+  const { dataByCustomDates } = filters
+  return dataByCustomDates
 }

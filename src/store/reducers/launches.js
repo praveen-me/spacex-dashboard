@@ -4,7 +4,7 @@ const initState = {
   limit: 10,
   data: {},
   currentPage: 1,
-  totalPages: 0,
+  launchesByCustomDates: {},
 }
 
 export default function lauchesReducer(state = initState, action) {
@@ -40,6 +40,13 @@ export default function lauchesReducer(state = initState, action) {
       return {
         ...state,
         currentPage: action.payload.data,
+      }
+    }
+
+    case launchesActionTypes.LAUCHES_BY_CUSTOM_DATES: {
+      return {
+        ...state,
+        launchesByCustomDates: action.payload.data,
       }
     }
 

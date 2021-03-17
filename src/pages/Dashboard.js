@@ -21,8 +21,12 @@ function DashboardPage() {
   useEffect(() => {
     const filter = query.get('filter')
     const dateFilter = query.get('dateFilter')
+    const start = query.get('start')
+    const end = query.get('end')
 
-    dispatch(getLaunchesRequested({ filter, dateFilter }))
+    if (!start && !end) {
+      dispatch(getLaunchesRequested({ filter, dateFilter }))
+    }
 
     if (filter) {
       dispatch(changeFilter(filter))
