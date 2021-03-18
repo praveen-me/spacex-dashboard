@@ -1,10 +1,12 @@
 import { launchesActionTypes } from '../actions/launches'
 
+const initLaunchesByCustomDates = { data: {}, totalPages: 0 }
+
 const initState = {
   limit: 10,
   data: {},
   currentPage: 1,
-  launchesByCustomDates: {},
+  launchesByCustomDates: initLaunchesByCustomDates,
 }
 
 export default function lauchesReducer(state = initState, action) {
@@ -44,9 +46,31 @@ export default function lauchesReducer(state = initState, action) {
     }
 
     case launchesActionTypes.LAUCHES_BY_CUSTOM_DATES: {
+      if (!action.payload.data) {
+        return {
+          ...state,
+          launchesByCustomDates: initLaunchesByCustomDates,
+        }
+      }
+
+      const { replace, launches } = action.payload.data
+
+      const { docs = [], page = 0, totalPages = 0 } = launches
+
+      const launchesByCustomDatesCopy = replace
+        ? initLaunchesByCustomDates
+        : state.launchesByCustomDates
+
       return {
         ...state,
-        launchesByCustomDates: action.payload.data,
+        launchesByCustomDates: {
+          ...launchesByCustomDatesCopy,
+          data: {
+            ...launchesByCustomDatesCopy.data,
+            [page]: docs,
+          },
+          totalPages,
+        },
       }
     }
 

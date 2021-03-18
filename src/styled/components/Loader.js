@@ -7,8 +7,9 @@ export const LoaderWrapper = styled.div`
   height: 100%;
   width: 100%;
   position: absolute;
-  top: 0;
-  background: rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 export const LoaderImage = styled.img`

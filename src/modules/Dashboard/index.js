@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux'
 import FilterByDate from '../../components/FilterByDate'
 import Filters from '../../components/Filters'
 import Loader from '../../components/Loader'
 import Pagination from '../../components/Pagination'
+import { getIsLoading } from '../../store/selectors/loading'
 import {
   DashboardTableColumn,
   DashboardTableHead,
@@ -14,6 +16,8 @@ import { tableColumns } from '../../utils/helpers'
 import Launches from './Launches'
 
 function Dashboard() {
+  const isLoading = useSelector(getIsLoading)
+
   return (
     <Container>
       <FiltersWrapper>
@@ -30,10 +34,9 @@ function Dashboard() {
             ))}
           </TableRow>
         </DashboardTableHead>
-        <Launches />
+        {isLoading ? <Loader /> : <Launches />}
       </DashboardWrapper>
       <Pagination />
-      <Loader />
     </Container>
   )
 }

@@ -2,7 +2,10 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Dashboard from '../modules/Dashboard'
 import { changeDateFilter, changeFilter } from '../store/actions/filters'
-import { getLaunchesRequested } from '../store/actions/launches'
+import {
+  getLaunchesByCustomDates,
+  getLaunchesRequested,
+} from '../store/actions/launches'
 import useQuery from '../utils/hooks/useQuery'
 
 function DashboardPage() {
@@ -10,11 +13,12 @@ function DashboardPage() {
   const query = useQuery()
 
   useEffect(() => {
-    const filter = query.get('filter')
-    const dateFilter = query.get('dateFilter')
+    const queryValues = ['filter', 'dateFilter', 'start', 'end'].map((v) =>
+      query.get(v)
+    )
 
-    if (!filter && !dateFilter) {
-      dispatch(getLaunchesRequested())
+    if (queryValues.every((v) => !v)) {
+      dispatch(getLaunchesRequested({ initial: true }))
     }
   }, [])
 
@@ -24,16 +28,21 @@ function DashboardPage() {
     const start = query.get('start')
     const end = query.get('end')
 
-    if (!start && !end) {
-      dispatch(getLaunchesRequested({ filter, dateFilter }))
-    }
-
     if (filter) {
       dispatch(changeFilter(filter))
     }
 
     if (dateFilter) {
       dispatch(changeDateFilter(dateFilter))
+    }
+
+    if (start && end) {
+      dispatch(getLaunchesByCustomDates({ filter, start, end, replace: true }))
+      return
+    }
+
+    if (!start && !end && (filter || dateFilter)) {
+      dispatch(getLaunchesRequested({ filter, dateFilter, initial: true }))
     }
   }, [query])
 

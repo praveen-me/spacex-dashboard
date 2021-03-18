@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useHistory } from 'react-router-dom'
 
@@ -21,17 +21,13 @@ import {
   FilterByDateIcon,
   FilterByDateOverlay,
 } from '../styled/components/FilterByDate'
-import { toogleFilterByCustomDates } from '../store/actions/filters'
 import useQuery from '../utils/hooks/useQuery'
-import { getLaunchesByCustomDates } from '../store/actions/launches'
 
 function FilterByDate() {
   const { currentDateFilter, dateFilters, currentFilterData } = useSelector(
     getDateFilters
   )
   const isLauchesByCustomDates = useSelector(isLaunchesByCustomDates)
-
-  const dispatch = useDispatch()
 
   const wrapperRef = useRef(null)
 
@@ -51,6 +47,16 @@ function FilterByDate() {
     setCustomDates(initialDates)
   }, [currentFilterData])
 
+  useEffect(() => {
+    if (isLauchesByCustomDates) {
+      const start = query.get('start')
+      const end = query.get('end')
+      setCustomDates(
+        moment.range(moment(new Date(start)), moment(new Date(end)))
+      )
+    }
+  }, [isLauchesByCustomDates])
+
   function toggleFilter() {
     setShowFilters(!showFilters)
   }
@@ -67,20 +73,8 @@ function FilterByDate() {
 
   function handleDateSelect(dates) {
     setCustomDates(dates)
-    if (!isLauchesByCustomDates) {
-      dispatch(toogleFilterByCustomDates())
-    }
-
     const startDate = dates.start.toISOString()
     const endDate = dates.end.toISOString()
-
-    dispatch(
-      getLaunchesByCustomDates({
-        start: startDate,
-        end: endDate,
-      })
-    )
-
     if (query.get('filter')) {
       history.push(
         `/?filter=${query.get('filter')}&start=${startDate}&end=${endDate}`
@@ -102,7 +96,9 @@ function FilterByDate() {
     <>
       <CurrentFilterWrapper onClick={toggleFilter}>
         <FilterByDateIcon src={svg.calender} />
-        <CurrentFilter>{currentFilterData.label}</CurrentFilter>
+        <CurrentFilter>
+          {isLauchesByCustomDates ? 'Custom Dates' : currentFilterData.label}
+        </CurrentFilter>
         <FilterByDateIcon src={svg.arrowRight} rotate="90deg" />
       </CurrentFilterWrapper>
       {showFilters && (
@@ -113,7 +109,11 @@ function FilterByDate() {
                 <DateFiltersByLabel
                   onClick={() => onFilterClick(filter.value)}
                   key={filter.label}
-                  active={filter.label === currentDateFilter}
+                  active={
+                    isLauchesByCustomDates
+                      ? false
+                      : filter.value === currentDateFilter
+                  }
                 >
                   {filter.label}
                 </DateFiltersByLabel>
