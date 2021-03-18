@@ -39,6 +39,7 @@ export const getLaunchesRequested = ({
   page,
   filter,
   dateFilter,
+  initial,
 } = {}) => async (dispatch, getState) => {
   const { launches, filters } = getState()
   const { limit, currentPage } = launches
@@ -50,14 +51,11 @@ export const getLaunchesRequested = ({
   const filterByDate = dateFilter || currentDateFilter
 
   if (dataByCustomDates) {
-    dispatchLaunchesByCustomDates()
+    dispatch(dispatchLaunchesByCustomDates())
     dispatch(toogleFilterByCustomDates())
   }
 
-  if (
-    (filter && filter !== filters.currentFilter) ||
-    (dateFilter && dateFilter !== filters.currentDateFilter)
-  ) {
+  if (initial) {
     dispatch(changeCurrentPage(1))
     pageNo = 1
   }
@@ -89,8 +87,6 @@ export const getLaunchesRequested = ({
     }
   }
 
-  console.log({ dateQuery })
-
   dispatch(toggleLoading())
   try {
     const query = { ...searchQuery, ...dateQuery }
@@ -120,9 +116,25 @@ export const getLaunchesByCustomDates = ({
   start,
   end,
   filter,
+  replace = false,
 }) => async (dispatch, getState) => {
   const { launches, filters } = getState()
-  const { limit, currentPage } = launches
+  const { limit, currentPage, launchesByCustomDates } = launches
+  const { dataByCustomDates } = filters
+  const pageNo = page || currentPage
+
+  if (!dataByCustomDates) {
+    dispatch(toogleFilterByCustomDates())
+  }
+
+  if (!replace && launchesByCustomDates.data[pageNo]) {
+    dispatch(changeCurrentPage(page))
+    return
+  }
+
+  if (page && page !== currentPage) {
+    dispatch(changeCurrentPage(page))
+  }
 
   try {
     dispatch(toggleLoading())
@@ -136,14 +148,17 @@ export const getLaunchesByCustomDates = ({
     }
 
     const { data } = await getLaunches({
-      page,
+      page: pageNo,
       limit,
       query,
     })
 
+    console.log({ data })
+
     dispatch(
       dispatchLaunchesByCustomDates({
-        ...data,
+        launches: data,
+        replace,
       })
     )
   } catch (e) {

@@ -22,7 +22,8 @@ export const DashboardWrapper = styled.table`
   border-radius: 6px;
   overflow: hidden;
   display: block;
-  min-height: 440px;
+  min-height: 445px;
+  position: relative;
 `
 export const DashboardTableHead = styled.thead`
   background: #f4f5f7;
