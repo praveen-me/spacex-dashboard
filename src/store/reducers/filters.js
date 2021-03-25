@@ -92,14 +92,14 @@ export default function filtersReducer(state = initialState, action) {
     case filterActionTypes.CHANGE_FILTER: {
       return {
         ...state,
-        currentFilter: action.payload,
+        currentFilter: action.payload || 'all',
       }
     }
 
     case filterActionTypes.CHANGE_DATE_FILTER: {
       return {
         ...state,
-        currentDateFilter: action.payload,
+        currentDateFilter: action.payload || 'all',
       }
     }
 
