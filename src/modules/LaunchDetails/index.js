@@ -17,6 +17,8 @@ import {
   CloseModal,
   CloseIcon,
   InfoLinkWrapper,
+  LaunchDescriptionWrapper,
+  WikipediaLink,
 } from '../../styled/modules/LauchDetails'
 import { getDate, getLaunchStatus } from '../../utils/helpers'
 import DetailStrip from './DetailStrip'
@@ -126,7 +128,14 @@ function LaunchDetails(props) {
             </LaunchInfoLinks>
           </LaunchDetailsWrapper>
         </LaunchInfo>
-        {details && <LaunchDescription>{details}</LaunchDescription>}
+        {details && (
+          <LaunchDescriptionWrapper>
+            <LaunchDescription>{details}</LaunchDescription>
+            <InfoLinkWrapper target="_blank" href={wikiPediaLink}>
+              <WikipediaLink>Wikipedia</WikipediaLink>
+            </InfoLinkWrapper>
+          </LaunchDescriptionWrapper>
+        )}
 
         {dataRows.map((row, index) =>
           row.value ? (
