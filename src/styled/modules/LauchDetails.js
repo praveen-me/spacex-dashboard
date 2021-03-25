@@ -71,7 +71,7 @@ export const LaunchDescription = styled.p`
   color: #1f2937;
   font-size: 14px;
   line-height: 24px;
-  margin: 1rem 0;
+  display: inline;
 `
 
 export const DetailStripWrapper = styled.div`
@@ -103,3 +103,13 @@ export const CloseModal = styled.button`
 `
 
 export const CloseIcon = styled.img``
+
+export const LaunchDescriptionWrapper = styled.div`
+  margin: 1rem 0;
+`
+
+export const WikipediaLink = styled.span`
+  margin-left: 0.5rem;
+  display: inline-block;
+  color: #6464f5;
+`
