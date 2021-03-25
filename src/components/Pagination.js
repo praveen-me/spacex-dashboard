@@ -16,6 +16,7 @@ import {
 } from '../styled/components/Pagination'
 import useQuery from '../utils/hooks/useQuery'
 
+const threshold = 5
 function Pagination() {
   const { allPages, currentPage } = useSelector(getPageStatus)
   const isLoading = useSelector(getIsLoading)
@@ -54,24 +55,62 @@ function Pagination() {
     }
   }
 
+  function renderButton(page) {
+    if (!page) return null
+
+    return (
+      <PageBlock
+        disabled={isLoading}
+        key={page}
+        currentPage={page === currentPage}
+        onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          if (isNaN(Number(page))) return
+
+          handlePagination(page)
+        }}
+      >
+        {page === 'initial' || page === 'end' ? '...' : page}
+      </PageBlock>
+    )
+  }
+
   return (
     <div style={{ textAlign: 'right' }}>
       <PaginationWrapper>
         <PageBlock onClick={onPrevPageClick}>
           <PaginationIcon src={svg.arrowLeft} />
         </PageBlock>
-        {allPages.map((page) => (
-          <PageBlock
-            disabled={isLoading}
-            key={page}
-            currentPage={page === currentPage}
-            onClick={() => {
-              handlePagination(page)
-            }}
-          >
-            {page}
-          </PageBlock>
-        ))}
+        {allPages.map((page, index) => {
+          if (threshold <= currentPage && index === 1) {
+            return renderButton('initial')
+          }
+
+          if (currentPage === 1 && index + 1 < 4) {
+            return renderButton(page)
+          }
+
+          if (currentPage !== 1 && index + 1 === 1) {
+            return renderButton(page)
+          }
+          if (
+            currentPage !== 1 &&
+            index + 1 >= currentPage - 2 &&
+            index + 1 <= currentPage + 2
+          ) {
+            return renderButton(page)
+          }
+
+          if (index === allPages.length - 2) {
+            return renderButton('end')
+          }
+
+          if (index === allPages.length - 1) {
+            return renderButton(page)
+          }
+
+          return renderButton(null)
+        })}
         <PageBlock last onClick={onNextPageClick}>
           <PaginationIcon src={svg.arrowRight} />
         </PageBlock>

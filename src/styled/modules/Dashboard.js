@@ -60,7 +60,7 @@ export const FiltersWrapper = styled.div`
   padding-bottom: 3rem;
 `
 
-export const ListEmptyPara = styled.p`
+export const ListEmptyPara = styled.td`
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;

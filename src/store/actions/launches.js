@@ -56,16 +56,16 @@ export const getLaunchesRequested = ({
   }
 
   if (initial) {
-    dispatch(changeCurrentPage(1))
     pageNo = 1
   }
+
+  dispatch(changeCurrentPage(pageNo))
 
   if (
     launches.data[searchByFilter] &&
     launches.data[searchByFilter][filterByDate] &&
     launches.data[searchByFilter][filterByDate].docs[pageNo]
   ) {
-    dispatch(changeCurrentPage(pageNo))
     return
   }
 
@@ -112,7 +112,7 @@ export const getLaunchesRequested = ({
 }
 
 export const getLaunchesByCustomDates = ({
-  page,
+  page = 1,
   start,
   end,
   filter,
@@ -152,8 +152,6 @@ export const getLaunchesByCustomDates = ({
       limit,
       query,
     })
-
-    console.log({ data })
 
     dispatch(
       dispatchLaunchesByCustomDates({
