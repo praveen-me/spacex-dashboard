@@ -1,5 +1,7 @@
-import { useEffect } from 'react'
+/* eslint-disable no-restricted-globals */
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Dashboard from '../modules/Dashboard'
 import { changeDateFilter, changeFilter } from '../store/actions/filters'
 import {
@@ -9,17 +11,38 @@ import {
 import useQuery from '../utils/hooks/useQuery'
 
 function DashboardPage() {
+  const [pageLocation, setLocation] = useState(null)
   const dispatch = useDispatch()
   const query = useQuery()
+  const history = useHistory()
 
-  useEffect(() => {
+  function fetchInitialLaunches() {
     const queryValues = ['filter', 'dateFilter', 'start', 'end'].map((v) =>
       query.get(v)
     )
 
     if (queryValues.every((v) => !v)) {
-      dispatch(getLaunchesRequested({ initial: true }))
+      dispatch(changeFilter('all'))
+      dispatch(changeDateFilter('all'))
+      dispatch(
+        getLaunchesRequested({
+          initial: true,
+          dateFilter: 'all',
+          filter: 'all',
+        })
+      )
     }
+  }
+
+  useEffect(() => {
+    fetchInitialLaunches()
+    history.listen((location) => {
+      if (!location.search) {
+        fetchInitialLaunches()
+      }
+
+      setLocation(location)
+    })
   }, [])
 
   useEffect(() => {
@@ -28,13 +51,9 @@ function DashboardPage() {
     const start = query.get('start')
     const end = query.get('end')
 
-    if (filter) {
-      dispatch(changeFilter(filter))
-    }
+    dispatch(changeFilter(filter))
 
-    if (dateFilter) {
-      dispatch(changeDateFilter(dateFilter))
-    }
+    dispatch(changeDateFilter(dateFilter))
 
     if (start && end) {
       dispatch(getLaunchesByCustomDates({ filter, start, end, replace: true }))
@@ -44,7 +63,7 @@ function DashboardPage() {
     if (!start && !end && (filter || dateFilter)) {
       dispatch(getLaunchesRequested({ filter, dateFilter, initial: true }))
     }
-  }, [query])
+  }, [query, pageLocation])
 
   return <Dashboard />
 }
