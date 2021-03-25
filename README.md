@@ -4,6 +4,8 @@ This projects shows all the SpaceX Launches.
 
 This Project is built in **React.js**, **React Router DOM** and **Redux**.
 
+Check online demo of the application: https://spacex-dashboard.vercel.app
+
 ## API
 In this project, we are using https://github.com/r-spacex/SpaceX-API/blob/master/docs/v4.
 
