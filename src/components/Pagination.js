@@ -1,13 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux'
+/* eslint-disable no-restricted-globals */
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import svg from '../assets/svg'
-import {
-  getLaunchesByCustomDates,
-  getLaunchesRequested,
-} from '../store/actions/launches'
-import {
-  getPageStatus,
-  isLaunchesByCustomDates,
-} from '../store/selectors/dashboard'
+
+import { getPageStatus } from '../store/selectors/dashboard'
 import { getIsLoading } from '../store/selectors/loading'
 import {
   PageBlock,
@@ -20,26 +16,21 @@ const threshold = 5
 function Pagination() {
   const { allPages, currentPage } = useSelector(getPageStatus)
   const isLoading = useSelector(getIsLoading)
-  const isLauchesByCustomDates = useSelector(isLaunchesByCustomDates)
-  const dispatch = useDispatch()
+
   const query = useQuery()
+  const history = useHistory()
 
   if (!(allPages.length > 1)) return null
 
   function handlePagination(page) {
-    if (isLauchesByCustomDates) {
-      const start = query.get('start')
-      const end = query.get('end')
-      const filter = query.get('filter')
-      dispatch(
-        getLaunchesByCustomDates({ filter, start, end, replace: false, page })
+    const pageNo = query.get('page')
+    if (!pageNo) {
+      history.push(
+        location.search ? `${location.search}&page=${page}` : `/?page=${page}`
       )
     } else {
-      dispatch(
-        getLaunchesRequested({
-          page,
-        })
-      )
+      const n = location.search.replace(/page=[0-9]*/g, `page=${page}`)
+      history.push(`/${n}`)
     }
   }
 

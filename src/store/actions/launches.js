@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import { getLaunches } from '../../utils/api'
 import { toggleLoading } from './loading'
 import { filterQueries, toogleFilterByCustomDates } from './filters'
@@ -39,7 +41,6 @@ export const getLaunchesRequested = ({
   page,
   filter,
   dateFilter,
-  initial,
 } = {}) => async (dispatch, getState) => {
   const { launches, filters } = getState()
   const { limit, currentPage } = launches
@@ -47,16 +48,12 @@ export const getLaunchesRequested = ({
 
   const searchByFilter = filter || filters.currentFilter
   const searchQuery = filterQueries[searchByFilter]
-  let pageNo = page || currentPage
+  const pageNo = page || currentPage
   const filterByDate = dateFilter || currentDateFilter
 
   if (dataByCustomDates) {
     dispatch(dispatchLaunchesByCustomDates())
     dispatch(toogleFilterByCustomDates())
-  }
-
-  if (initial) {
-    pageNo = 1
   }
 
   dispatch(changeCurrentPage(pageNo))
@@ -141,8 +138,8 @@ export const getLaunchesByCustomDates = ({
 
     const query = {
       date_utc: {
-        $gte: start,
-        $lte: end,
+        $gte: moment(start).toISOString(),
+        $lte: moment(end).toISOString(),
       },
       ...filterQueries[filter || filters.currentFilter],
     }

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -27,10 +28,24 @@ function Filters() {
 
   function handleOnChange(filter) {
     if (filter !== currentFilter) {
-      if (query.get('dateFilter')) {
-        history.push(`/?filter=${filter}&dateFilter=${query.get('dateFilter')}`)
+      const newFilter = query.get('filter')
+      const currentPage = query.get('page')
+
+      let searchString = location.search
+
+      if (currentPage) {
+        searchString = searchString.replace(/[&]?page=[0-9]*[&]?/g, ``)
+      }
+
+      if (!newFilter) {
+        history.push(
+          searchString
+            ? `${searchString}&filter=${filter}`
+            : `/?filter=${filter}`
+        )
       } else {
-        history.push(`/?filter=${filter}`)
+        const n = searchString.replace(/filter=[a-z]*/g, `filter=${filter}`)
+        history.push(`/${n}`)
       }
 
       toggleFilter()
@@ -54,6 +69,7 @@ function Filters() {
             <Option
               active={filter.value === currentFilter}
               onClick={() => handleOnChange(filter.value)}
+              key={filter.label}
             >
               {filter.label}
             </Option>
