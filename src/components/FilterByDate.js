@@ -38,24 +38,22 @@ function FilterByDate() {
   const query = useQuery()
 
   useEffect(() => {
-    const initialDates = !currentFilterData.dates.start
-      ? null
-      : moment.range(
-          moment(currentFilterData.dates.start),
-          moment(currentFilterData.dates.end)
-        )
-    setCustomDates(initialDates)
-  }, [currentFilterData])
-
-  useEffect(() => {
     if (isLauchesByCustomDates) {
       const start = query.get('start')
       const end = query.get('end')
       setCustomDates(
         moment.range(moment(new Date(start)), moment(new Date(end)))
       )
+    } else {
+      const initialDates = !currentFilterData.dates.start
+        ? null
+        : moment.range(
+            moment(currentFilterData.dates.start),
+            moment(currentFilterData.dates.end)
+          )
+      setCustomDates(initialDates)
     }
-  }, [isLauchesByCustomDates])
+  }, [isLauchesByCustomDates, currentFilterData])
 
   function toggleFilter() {
     setShowFilters(!showFilters)

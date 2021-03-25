@@ -39,6 +39,7 @@ export const OptionsWrapper = styled.div`
   top: 30px;
   display: flex;
   flex-direction: column;
+  z-index: 100;
 `
 
 export const Option = styled.button`
