@@ -60,10 +60,35 @@ function FilterByDate() {
   }
 
   function onFilterClick(filter) {
-    if (query.get('filter')) {
-      history.push(`/?filter=${query.get('filter')}&dateFilter=${filter}`)
+    const dateFilterQuery = query.get('dateFilter')
+    const startFilter = query.get('start')
+    const endFilter = query.get('end')
+    const currentPage = query.get('page')
+
+    let searchString = location.search
+
+    if (startFilter && endFilter) {
+      searchString = searchString.replace(/[&]?start=[A-Z0-9-:]*[&]?/g, ``)
+
+      searchString = searchString.replace(/[&]?end=[A-Z0-9-:]*[&]?/g, ``)
+    }
+
+    if (currentPage) {
+      searchString = searchString.replace(/[&]?page=[0-9]*[&]?/g, ``)
+    }
+
+    if (!dateFilterQuery) {
+      history.push(
+        searchString
+          ? `${searchString}&dateFilter=${filter}`
+          : `/?dateFilter=${filter}`
+      )
     } else {
-      history.push(`/?dateFilter=${filter}`)
+      const n = searchString.replace(
+        /dateFilter=[a-z0-9_]*/g,
+        `dateFilter=${filter}`
+      )
+      history.push(`/${n}`)
     }
 
     toggleFilter()
@@ -71,16 +96,42 @@ function FilterByDate() {
 
   function handleDateSelect(dates) {
     setCustomDates(dates)
-    const startDate = dates.start.toISOString()
-    const endDate = dates.end.toISOString()
-    if (query.get('filter')) {
-      history.push(
-        `/?filter=${query.get('filter')}&start=${startDate}&end=${endDate}`
-      )
-    } else {
-      history.push(`/?start=${startDate}&end=${endDate}`)
+    let startDate = dates.start.toISOString()
+    startDate = startDate.slice(0, startDate.indexOf('T'))
+
+    let endDate = dates.end.toISOString()
+    endDate = endDate.slice(0, endDate.indexOf('T'))
+
+    const startFilter = query.get('start')
+    const endFilter = query.get('end')
+    const dateFilterQuery = query.get('dateFilter')
+    const currentPage = query.get('page')
+
+    let searchString = location.search
+
+    if (currentPage) {
+      searchString = searchString.replace(/[&]?page=[0-9]*[&]?/g, ``)
     }
 
+    if (dateFilterQuery) {
+      searchString = searchString.replace(/[&]?dateFilter=[a-z0-9_]*[&]?/g, ``)
+    }
+
+    if (!startFilter && !endFilter) {
+      history.push(
+        searchString
+          ? `${searchString}&start=${startDate}&end=${endDate}`
+          : `/?start=${startDate}&end=${endDate}`
+      )
+    } else {
+      let dateReplaced = searchString.replace(
+        /start=[A-Z0-9-:]*/g,
+        `start=${startDate}`
+      )
+      dateReplaced = dateReplaced.replace(/end=[A-Z0-9-:]*/g, `end=${endDate}`)
+
+      history.push(`/${dateReplaced}`)
+    }
     toggleFilter()
   }
 

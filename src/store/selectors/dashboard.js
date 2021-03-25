@@ -5,7 +5,7 @@ export function getAllLaunches(state) {
   const { currentFilter, currentDateFilter, dataByCustomDates } = filters
 
   if (dataByCustomDates) {
-    return launchesByCustomDates.data[currentPage]|| []
+    return launchesByCustomDates.data[currentPage] || []
   }
 
   return (

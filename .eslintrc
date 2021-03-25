@@ -21,6 +21,8 @@
     "react/require-default-props" : "off",
     "camelcase": "off",
     "no-unused-vars": "warn",
-    "no-underscore-dangle": "warn"
+    "no-underscore-dangle": "warn",
+    "no-restricted-globals": "off",
+    "no-console": "off"
   }
 }

@@ -17,9 +17,13 @@ function DashboardPage() {
   const history = useHistory()
 
   function fetchInitialLaunches() {
-    const queryValues = ['filter', 'dateFilter', 'start', 'end'].map((v) =>
-      query.get(v)
-    )
+    const queryValues = [
+      'filter',
+      'dateFilter',
+      'start',
+      'end',
+      'page',
+    ].map((v) => query.get(v))
 
     if (queryValues.every((v) => !v)) {
       dispatch(changeFilter('all'))
@@ -29,6 +33,7 @@ function DashboardPage() {
           initial: true,
           dateFilter: 'all',
           filter: 'all',
+          page: 1,
         })
       )
     }
@@ -50,18 +55,29 @@ function DashboardPage() {
     const dateFilter = query.get('dateFilter')
     const start = query.get('start')
     const end = query.get('end')
+    const page = query.get('page')
 
     dispatch(changeFilter(filter))
 
     dispatch(changeDateFilter(dateFilter))
 
     if (start && end) {
-      dispatch(getLaunchesByCustomDates({ filter, start, end, replace: true }))
+      dispatch(
+        getLaunchesByCustomDates({
+          filter,
+          start,
+          end,
+          replace: true,
+          page: Number(page) || 1,
+        })
+      )
       return
     }
 
-    if (!start && !end && (filter || dateFilter)) {
-      dispatch(getLaunchesRequested({ filter, dateFilter, initial: true }))
+    if (!start && !end && (filter || dateFilter || page)) {
+      dispatch(
+        getLaunchesRequested({ filter, dateFilter, page: Number(page) || 1 })
+      )
     }
   }, [query, pageLocation])
 
