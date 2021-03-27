@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  spacex-dashboard:
+    container_name: spacex-dashboard
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spacex-dashboard
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
