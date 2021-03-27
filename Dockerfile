@@ -13,17 +13,12 @@ COPY . /app
 
 RUN yarn build
 
-
 # STAGE 2
 
-FROM node:12-alpine
+FROM nginx:stable-alpine
 
-WORKDIR /app
+COPY --from=build /app/build /usr/share/nginx/html
 
-RUN npm install -g webserver.local
+EXPOSE 80
 
-COPY --from=build /app/build ./build
-
-EXPOSE 3000
-
-CMD webserver.local -d ./build
+CMD ["nginx", "-g", "daemon off;"]
