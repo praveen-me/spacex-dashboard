@@ -22,7 +22,7 @@ export const DashboardWrapper = styled.table`
   border-radius: 6px;
   overflow: hidden;
   display: block;
-  min-height: 445px;
+  min-height: 600px;
   position: relative;
 `
 export const DashboardTableHead = styled.thead`
@@ -36,6 +36,7 @@ export const TableRow = styled.tr`
   justify-content: space-between;
   flex: 1;
   height: 40px;
+  margin: 16px 0;
   ${(props) => props.showCursor && `cursor: pointer`}
 `
 
