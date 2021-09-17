@@ -54,11 +54,7 @@ export async function getLaunches({ page = 1, limit = 10, query = {} }) {
       populate: [
         {
           path: 'payloads',
-          populate: [
-            {
-              path: 'payloads',
-            },
-          ],
+
           select: {
             name: 1,
             orbit: 1,
@@ -66,11 +62,6 @@ export async function getLaunches({ page = 1, limit = 10, query = {} }) {
         },
         {
           path: 'rocket',
-          populate: [
-            {
-              path: 'rockets',
-            },
-          ],
           select: {
             name: 1,
             engines: 1,
@@ -80,11 +71,6 @@ export async function getLaunches({ page = 1, limit = 10, query = {} }) {
         },
         {
           path: 'launchpad',
-          populate: [
-            {
-              path: 'launchpads',
-            },
-          ],
           select: {
             locality: 1,
             name: 1,
